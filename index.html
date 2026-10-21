@@ -4,231 +4,178 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ziko Mazziko CANVAS Studio</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { 
-            background-color: #0b0f19; 
-            color: #f3f4f6; 
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-        }
-        .glow-box { 
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.12); 
-        }
-        .glow-text {
-            text-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
-        }
-        /* Custom scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0b0f19; }
-        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 9999px; }
-        ::-webkit-scrollbar-thumb:hover { background: #374151; }
+        body { background-color: #0b0f19; color: #f3f4f6; font-family: system-ui, -apple-system, sans-serif; }
+        .glow-box { box-shadow: 0 0 30px rgba(59, 130, 246, 0.12); }
+        .color-swatch.active { border-color: #3b82f6; ring: 2px; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+<body class="min-h-screen flex flex-col justify-between">
 
-    <!-- Header Bar -->
-    <header class="border-b border-gray-800 bg-gray-900/70 backdrop-blur-md py-4 px-4 sm:px-8 sticky top-0 z-50 flex flex-col sm:flex-row justify-between items-center gap-3">
+    <!-- Header -->
+    <header class="border-b border-gray-800 bg-gray-900/60 backdrop-blur py-4 px-6 sticky top-0 z-50 flex flex-wrap justify-between items-center gap-4">
         <div class="flex items-center space-x-3">
-            <div class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-pulse shadow-lg shadow-blue-500/50"></div>
-            <h1 class="font-bold tracking-wider text-xl text-white">
-                Ziko Mazziko <span class="text-blue-500 glow-text">CANVAS Studio</span>
-            </h1>
+            <div class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-pulse"></div>
+            <h1 class="font-bold tracking-wider text-xl text-white">Ziko Mazziko <span class="text-blue-500">CANVAS Studio</span></h1>
         </div>
-        <div class="text-xs font-medium text-gray-300 bg-gray-800/80 px-3.5 py-1.5 rounded-full border border-gray-700/80 flex items-center gap-2">
-            <i class="fa-solid fa-crown text-amber-400 text-xs"></i>
-            <span>By Ziko Mazziko & I. Z. Verse Studio</span>
+        <div class="text-xs font-medium text-gray-300 bg-gray-800/90 border border-gray-700 px-3.5 py-1.5 rounded-full">
+            By Ziko Mazziko & I. Z. Verse Studio
         </div>
     </header>
 
-    <!-- Top Banner / Hero Title Section -->
-    <section class="max-w-6xl mx-auto w-full px-4 pt-6 text-center space-y-2">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-blue-400">
+    <!-- Sub-Header Title & Description -->
+    <section class="max-w-6xl mx-auto w-full px-6 pt-6 text-center">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300 mb-2">
             Supporting Independent Artists Content Creation & Growth
         </h2>
-        <p class="text-sm sm:text-base text-gray-400 max-w-3xl mx-auto">
-            Generate Free Unlimited Video Canvas for Your Music — Share & Go Viral with Ease
+        <p class="text-sm md:text-base text-gray-400 max-w-2xl mx-auto">
+            Generate Free Unlimited Video Canvas for your music, Share it & Go Viral at Ease
         </p>
     </section>
 
-    <!-- Main Content Workspace -->
-    <main class="max-w-6xl mx-auto w-full p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 my-auto">
+    <!-- Main Content Grid -->
+    <main class="max-w-6xl mx-auto w-full p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
         
-        <!-- Audio & Visual Configuration Column -->
-        <div class="lg:col-span-6 bg-gray-900/80 border border-gray-800/90 p-5 sm:p-6 rounded-2xl glow-box flex flex-col justify-between space-y-6">
-            <div class="space-y-5">
-                <div class="flex items-center justify-between border-b border-gray-800 pb-3">
-                    <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-sliders text-blue-500 text-sm"></i>
-                        Audio & Visual Configuration
-                    </h3>
-                    <span class="text-[11px] text-gray-500 font-mono">v2.5 PRO</span>
-                </div>
+        <!-- Controls Column -->
+        <div class="lg:col-span-5 bg-gray-900/80 border border-gray-800 p-6 rounded-2xl glow-box flex flex-col justify-between space-y-5">
+            <div class="space-y-4">
+                <h3 class="text-lg font-semibold text-white border-b border-gray-800 pb-2.5 flex items-center justify-between">
+                    <span>Audio & Visual Configuration</span>
+                    <span class="text-xs text-blue-400 font-normal">Step-by-Step</span>
+                </h3>
                 
-                <!-- 1. Audio File Upload -->
+                <!-- Audio Upload -->
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1.5 uppercase tracking-wider">1. Upload Audio (.mp3 / .wav)</label>
-                    <div class="relative">
-                        <input type="file" id="audioFile" accept="audio/*" class="w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-2 transition focus:outline-none focus:border-blue-500"/>
-                        <p id="audioNameDisplay" class="text-[11px] text-gray-500 mt-1 truncate"></p>
-                    </div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1.5">1. Upload Track Audio (.mp3 / .wav)</label>
+                    <input type="file" id="audioFile" accept="audio/*" class="w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-1.5"/>
                 </div>
 
-                <!-- 2. Cover Artwork Upload -->
+                <!-- Artwork Upload -->
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1.5 uppercase tracking-wider">2. Upload Cover Artwork</label>
-                    <div class="relative">
-                        <input type="file" id="imageFile" accept="image/*" class="w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gray-800 file:text-gray-200 hover:file:bg-gray-700 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-2 transition focus:outline-none focus:border-blue-500"/>
-                        <p id="imageNameDisplay" class="text-[11px] text-gray-500 mt-1 truncate"></p>
-                    </div>
-                </div>
-
-                <!-- Artwork Rotation Option -->
-                <div class="flex items-center space-x-2 pt-1">
-                    <input type="checkbox" id="rotateArtwork" class="w-4 h-4 rounded bg-gray-950 border-gray-800 text-blue-600 focus:ring-blue-500 focus:ring-offset-gray-900 cursor-pointer">
-                    <label for="rotateArtwork" class="text-xs text-gray-300 cursor-pointer select-none flex items-center gap-1.5">
-                        <i class="fa-solid fa-rotate text-blue-400"></i>
-                        Rotate Cover Artwork Continuously
-                    </label>
+                    <label class="block text-xs font-medium text-gray-300 mb-1.5">2. Upload Cover Artwork</label>
+                    <input type="file" id="imageFile" accept="image/*" class="w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gray-800 file:text-gray-200 hover:file:bg-gray-700 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-1.5"/>
                 </div>
 
                 <!-- Metadata Inputs -->
-                <div class="grid grid-cols-2 gap-3 pt-1">
+                <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-medium text-gray-400 mb-1">Track Title</label>
-                        <input type="text" id="trackTitle" value="Midnight Echoes" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 transition"/>
+                        <input type="text" id="trackTitle" value="Midnight Echoes" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 text-white"/>
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-gray-400 mb-1">Artist Name</label>
-                        <input type="text" id="artistName" value="Ziko Mazziko" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 transition"/>
+                        <input type="text" id="artistName" value="Ziko Mazziko" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 text-white"/>
                     </div>
                 </div>
 
-                <!-- Visualizer Style Selection -->
+                <!-- Visual Mode Selection -->
                 <div>
                     <label class="block text-xs font-medium text-gray-400 mb-1">Visualizer Style</label>
-                    <select id="visualMode" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-blue-500 transition cursor-pointer">
-                        <option value="bars">Frequency Spectrum Bars</option>
-                        <option value="circle">Circular Wave Pulsar</option>
-                        <option value="vinyl">Spinning Vinyl Record</option>
-                        <option value="neon">Neon Ambient Aura</option>
-                        <option value="matrix">Cyberpunk Grid Matrix</option>
-                        <option value="oscilloscope">Stereo Oscilloscope Waves</option>
-                        <option value="particles">Floating Particle Orbit</option>
+                    <select id="visualMode" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 text-white">
+                        <option value="bars">Centered Frequency Bars</option>
+                        <option value="cyberRing">Cyberpunk Pulse Ring</option>
+                        <option value="particles">Floating Audio Particles</option>
+                        <option value="bassAura">Bass Aura Glow</option>
                     </select>
                 </div>
 
-                <!-- Palette / Color Mode Customization -->
-                <div class="space-y-2 pt-1 border-t border-gray-800/60">
-                    <div class="flex items-center justify-between">
-                        <label class="text-xs font-medium text-gray-400">Color Palette Mode</label>
-                        <button type="button" id="randomizeColorsBtn" class="text-[11px] text-blue-400 hover:text-blue-300 font-medium flex items-center gap-1 transition">
-                            <i class="fa-solid fa-dice text-xs"></i> Randomize Colors
-                        </button>
+                <!-- Color Mode & Custom Pickers -->
+                <div>
+                    <label class="block text-xs font-medium text-gray-400 mb-1.5">Color Palette Mode</label>
+                    <div class="grid grid-cols-4 gap-2 mb-2" id="paletteGroup">
+                        <button type="button" data-palette="mono" class="palette-btn py-1.5 text-[11px] font-medium rounded-lg border border-blue-500 bg-blue-600/20 text-blue-400">Mono</button>
+                        <button type="button" data-palette="dual" class="palette-btn py-1.5 text-[11px] font-medium rounded-lg border border-gray-800 bg-gray-950 text-gray-400 hover:border-gray-700">Dual</button>
+                        <button type="button" data-palette="tri" class="palette-btn py-1.5 text-[11px] font-medium rounded-lg border border-gray-800 bg-gray-950 text-gray-400 hover:border-gray-700">Tri-Tone</button>
+                        <button type="button" data-palette="rainbow" class="palette-btn py-1.5 text-[11px] font-medium rounded-lg border border-gray-800 bg-gray-950 text-gray-400 hover:border-gray-700">Rainbow</button>
                     </div>
-                    <div class="grid grid-cols-4 gap-2">
-                        <select id="colorMode" class="col-span-2 bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-blue-500 transition cursor-pointer">
-                            <option value="single">Single Color</option>
-                            <option value="dual" selected>Dual Gradient</option>
-                            <option value="triple">Triple Gradient</option>
-                            <option value="rainbow">Dynamic Rainbow</option>
-                        </select>
-                        
-                        <!-- Color Selectors -->
-                        <div class="col-span-2 flex items-center space-x-2">
-                            <input type="color" id="color1" value="#3b82f6" title="Primary Color" class="w-8 h-8 rounded-lg bg-gray-950 border border-gray-800 p-0.5 cursor-pointer">
-                            <input type="color" id="color2" value="#8b5cf6" title="Secondary Color" class="w-8 h-8 rounded-lg bg-gray-950 border border-gray-800 p-0.5 cursor-pointer">
-                            <input type="color" id="color3" value="#ec4899" title="Accent Color" class="w-8 h-8 rounded-lg bg-gray-950 border border-gray-800 p-0.5 cursor-pointer">
+
+                    <div class="flex items-center space-x-3 bg-gray-950 p-2 border border-gray-800 rounded-xl">
+                        <div class="flex items-center space-x-1.5">
+                            <label class="text-[10px] text-gray-400">Color 1:</label>
+                            <input type="color" id="color1" value="#3b82f6" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0"/>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <label class="text-[10px] text-gray-400">Color 2:</label>
+                            <input type="color" id="color2" value="#8b5cf6" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0"/>
+                        </div>
+                        <div class="flex items-center space-x-1.5">
+                            <label class="text-[10px] text-gray-400">Color 3:</label>
+                            <input type="color" id="color3" value="#ec4899" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0"/>
                         </div>
                     </div>
                 </div>
+
+                <!-- Rotate Artwork Button Toggle -->
+                <div>
+                    <button type="button" id="rotateToggleBtn" class="w-full py-2 bg-gray-950 hover:bg-gray-800 border border-gray-800 text-xs font-medium rounded-xl text-gray-300 transition flex items-center justify-center space-x-2">
+                        <span id="rotateIndicator" class="w-2 h-2 rounded-full bg-gray-600"></span>
+                        <span id="rotateText">Artwork Rotation: OFF</span>
+                    </button>
+                </div>
             </div>
 
-            <!-- Action Buttons -->
-            <div class="space-y-2.5 pt-4 border-t border-gray-800">
-                <button id="playBtn" disabled class="w-full py-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-xs sm:text-sm text-white rounded-xl transition shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-play text-xs"></i>
-                    <span>Play & Preview</span>
-                </button>
-                <button id="recordBtn" disabled class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-xs sm:text-sm text-white rounded-xl transition shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-video text-xs"></i>
-                    <span>Export 9:16 Video (.webm)</span>
-                </button>
-
-                <!-- Clear & Reset Inputs Button -->
-                <button id="resetBtn" type="button" class="w-full py-2.5 bg-gray-800/80 hover:bg-red-950/40 hover:text-red-400 text-gray-400 border border-gray-700/60 rounded-xl text-xs font-medium transition flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-trash-can text-xs"></i>
-                    <span>Clear Inputs & Reset Config</span>
-                </button>
-
-                <div id="statusText" class="text-xs text-center text-gray-400 min-h-[1.25rem] font-medium pt-1"></div>
+            <!-- Action Controls & Reset -->
+            <div class="space-y-2.5 pt-3 border-t border-gray-800">
+                <button id="playBtn" disabled class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-xs rounded-xl transition shadow-lg shadow-blue-600/20 text-white">Play & Preview</button>
+                <button id="recordBtn" disabled class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-xs rounded-xl transition shadow-lg shadow-emerald-600/20 text-white">Export 9:16 Video (.webm / .mp4)</button>
+                <button id="resetBtn" class="w-full py-2 bg-gray-950 hover:bg-red-950/40 border border-gray-800 hover:border-red-800/50 text-gray-400 hover:text-red-400 text-xs font-medium rounded-xl transition">Clear Inputs & Reset Config</button>
+                <div id="statusText" class="text-[11px] text-center text-blue-400 min-h-[16px]"></div>
             </div>
         </div>
 
-        <!-- Preview Column (9:16 Vertical Canvas Format) -->
-        <div class="lg:col-span-6 flex flex-col items-center justify-center bg-gray-900/40 border border-gray-800/80 rounded-2xl p-4 sm:p-6 relative overflow-hidden">
-            <div class="relative w-[280px] sm:w-[320px] h-[497px] sm:h-[568px] bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800/90 flex flex-col items-center justify-center">
+        <!-- Preview Column (9:16 Vertical Canvas) -->
+        <div class="lg:col-span-7 flex flex-col items-center justify-center bg-gray-900/40 border border-gray-800 rounded-2xl p-4 md:p-6 relative overflow-hidden">
+            <div class="relative w-[300px] h-[533px] bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800 flex flex-col items-center justify-center">
                 <canvas id="canvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
             </div>
-            <p class="text-xs text-gray-400 mt-3 text-center font-medium">
-                Exact 9:16 aspect ratio optimized for Social Media & Music Streaming Platforms
-            </p>
+            <p class="text-xs text-gray-400 mt-3 text-center">Exact 9:16 aspect ratio optimized for Social Media & Music Streaming Platforms</p>
         </div>
-
     </main>
 
-    <!-- Footer Links & Ecosystem Section -->
-    <footer class="mt-8 border-t border-gray-800/80 bg-gray-950/80 py-6 px-4 text-center space-y-4">
-        
-        <!-- Primary Secured Badge -->
-        <p class="text-xs text-gray-400 flex items-center justify-center gap-2">
-            <i class="fa-solid fa-shield-halved text-emerald-400"></i>
-            <span>Safe & Secured audio visualizer engine • Powered by <strong>I. Z. Verse Studio</strong></span>
-        </p>
-
-        <!-- Learn More & Studio External Links -->
-        <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 text-xs">
-            <span class="text-gray-500 font-semibold uppercase tracking-wider text-[11px]">Learn More & Explore:</span>
-            <div class="flex items-center gap-4">
-                <a href="https://ziko-mazziko.izverse.store" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:text-blue-300 font-medium flex items-center gap-1.5 transition underline decoration-blue-500/40 underline-offset-4">
-                    <i class="fa-solid fa-wave-square text-xs"></i>
-                    <span>Sonic Identity</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-70"></i>
+    <!-- Learn More & Studio Websites Links -->
+    <section class="max-w-6xl mx-auto w-full px-6 py-6 border-t border-gray-800/80 my-4">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-gray-900/50 p-4 rounded-2xl border border-gray-800">
+            <div>
+                <h4 class="text-sm font-semibold text-white">Learn More & Explore Our Ecosystem</h4>
+                <p class="text-xs text-gray-400">Discover sonic identity services, AI visual production, and studio tools.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-3">
+                <a href="https://ziko-mazziko.izverse.store" target="_blank" rel="noopener noreferrer" class="text-xs px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-blue-400 font-medium border border-gray-700 transition">
+                    Sonic Identity Store ↗
                 </a>
-                <span class="text-gray-700">•</span>
-                <a href="https://izverse.store" target="_blank" rel="noopener noreferrer" class="text-purple-400 hover:text-purple-300 font-medium flex items-center gap-1.5 transition underline decoration-purple-500/40 underline-offset-4">
-                    <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
-                    <span>AI & Visual Studio</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-70"></i>
+                <a href="https://izverse.store" target="_blank" rel="noopener noreferrer" class="text-xs px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium transition">
+                    AI & Visual Studio ↗
                 </a>
             </div>
         </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="py-4 text-center text-xs text-gray-500 border-t border-gray-800">
+        Safe & Secured audio visualizer engine • Powered by I. Z. Verse Studio
     </footer>
 
-    <!-- Application Script Engine -->
+    <!-- Application Engine Script -->
     <script>
         const audioFile = document.getElementById('audioFile');
         const imageFile = document.getElementById('imageFile');
-        const audioNameDisplay = document.getElementById('audioNameDisplay');
-        const imageNameDisplay = document.getElementById('imageNameDisplay');
-        const trackTitle = document.getElementById('trackTitle');
-        const artistName = document.getElementById('artistName');
-        const rotateArtwork = document.getElementById('rotateArtwork');
-        const visualMode = document.getElementById('visualMode');
-        const colorMode = document.getElementById('colorMode');
-        const color1 = document.getElementById('color1');
-        const color2 = document.getElementById('color2');
-        const color3 = document.getElementById('color3');
-        const randomizeColorsBtn = document.getElementById('randomizeColorsBtn');
         const playBtn = document.getElementById('playBtn');
         const recordBtn = document.getElementById('recordBtn');
         const resetBtn = document.getElementById('resetBtn');
         const statusText = document.getElementById('statusText');
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
+        const visualMode = document.getElementById('visualMode');
+
+        const color1Input = document.getElementById('color1');
+        const color2Input = document.getElementById('color2');
+        const color3Input = document.getElementById('color3');
+        const paletteBtns = document.querySelectorAll('.palette-btn');
+
+        const rotateToggleBtn = document.getElementById('rotateToggleBtn');
+        const rotateIndicator = document.getElementById('rotateIndicator');
+        const rotateText = document.getElementById('rotateText');
 
         let audioCtx, audioElement, audioSource, analyser, mediaStreamDestination, mediaRecorder;
         let recordedChunks = [];
@@ -236,36 +183,63 @@
         let coverImg = new Image();
         let defaultImgLoaded = false;
         let animationId;
+        let rotateArtwork = false;
+        let selectedPalette = 'mono';
         let rotationAngle = 0;
-        let particleArray = [];
 
-        // Generate Particles for Particle Orbit Visualizer
-        for(let i = 0; i < 40; i++) {
-            particleArray.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                radius: Math.random() * 3 + 1,
-                speedX: (Math.random() - 0.5) * 2,
-                speedY: (Math.random() - 0.5) * 2
+        // Particle system storage
+        let particles = Array.from({ length: 40 }, () => ({
+            x: Math.random() * 540,
+            y: Math.random() * 960,
+            radius: Math.random() * 3 + 1,
+            speedY: Math.random() * 1.5 + 0.5,
+            alpha: Math.random() * 0.7 + 0.3
+        }));
+
+        // Palette Button Selection
+        paletteBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                paletteBtns.forEach(b => {
+                    b.classList.remove('border-blue-500', 'bg-blue-600/20', 'text-blue-400');
+                    b.classList.add('border-gray-800', 'bg-gray-950', 'text-gray-400');
+                });
+                btn.classList.remove('border-gray-800', 'bg-gray-950', 'text-gray-400');
+                btn.classList.add('border-blue-500', 'bg-blue-600/20', 'text-blue-400');
+                selectedPalette = btn.getAttribute('data-palette');
             });
-        }
+        });
 
-        // Draw Default Placeholder Artwork
-        function drawDefaultArt() {
-            ctx.fillStyle = '#111827';
+        // Rotation Toggle Button
+        rotateToggleBtn.addEventListener('click', () => {
+            rotateArtwork = !rotateArtwork;
+            if (rotateArtwork) {
+                rotateIndicator.classList.remove('bg-gray-600');
+                rotateIndicator.classList.add('bg-emerald-400');
+                rotateText.textContent = 'Artwork Rotation: ON';
+            } else {
+                rotateIndicator.classList.remove('bg-emerald-400');
+                rotateIndicator.classList.add('bg-gray-600');
+                rotateText.textContent = 'Artwork Rotation: OFF';
+            }
+        });
+
+        function drawPlaceholderArt() {
+            ctx.fillStyle = '#090d16';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = '#374151';
-            ctx.font = 'bold 30px system-ui';
+            ctx.fillStyle = '#1f2937';
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2 - 80, 110, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#4b5563';
+            ctx.font = 'bold 16px system-ui';
             ctx.textAlign = 'center';
-            ctx.fillText('NO ARTWORK UPLOADED', canvas.width / 2, canvas.height / 2);
+            ctx.fillText('NO ARTWORK LOADED', canvas.width / 2, canvas.height / 2 - 80);
         }
-        drawDefaultArt();
+        drawPlaceholderArt();
 
-        // Handle Cover Artwork Upload
         imageFile.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
-                imageNameDisplay.textContent = `Selected: ${file.name}`;
                 const reader = new FileReader();
                 reader.onload = (event) => {
                     coverImg.src = event.target.result;
@@ -275,11 +249,9 @@
             }
         });
 
-        // Handle Audio File Upload
         audioFile.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
-                audioNameDisplay.textContent = `Selected: ${file.name}`;
                 const url = URL.createObjectURL(file);
                 if (audioElement) { audioElement.pause(); }
                 audioElement = new Audio(url);
@@ -289,12 +261,11 @@
                 audioElement.oncanplaythrough = () => {
                     playBtn.disabled = false;
                     recordBtn.disabled = false;
-                    statusText.textContent = "Audio loaded and ready for preview!";
+                    statusText.textContent = "Audio loaded and ready for render!";
                 };
             }
         });
 
-        // Initialize Web Audio Context
         function initAudioContext() {
             if (audioCtx) return;
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -309,40 +280,6 @@
             analyser.connect(mediaStreamDestination);
         }
 
-        // Palette Color Helper
-        function getPaletteGradient(ctx, x1, y1, x2, y2, timeOffset = 0) {
-            const mode = colorMode.value;
-            const grad = ctx.createLinearGradient(x1, y1, x2, y2);
-
-            if (mode === 'single') {
-                grad.addColorStop(0, color1.value);
-                grad.addColorStop(1, color1.value);
-            } else if (mode === 'dual') {
-                grad.addColorStop(0, color1.value);
-                grad.addColorStop(1, color2.value);
-            } else if (mode === 'triple') {
-                grad.addColorStop(0, color1.value);
-                grad.addColorStop(0.5, color2.value);
-                grad.addColorStop(1, color3.value);
-            } else if (mode === 'rainbow') {
-                const hue1 = (timeOffset * 50) % 360;
-                const hue2 = (hue1 + 120) % 360;
-                const hue3 = (hue1 + 240) % 360;
-                grad.addColorStop(0, `hsl(${hue1}, 90%, 60%)`);
-                grad.addColorStop(0.5, `hsl(${hue2}, 90%, 60%)`);
-                grad.addColorStop(1, `hsl(${hue3}, 90%, 60%)`);
-            }
-            return grad;
-        }
-
-        // Randomize Color Pickers
-        randomizeColorsBtn.addEventListener('click', () => {
-            color1.value = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
-            color2.value = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
-            color3.value = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
-        });
-
-        // Play / Pause Preview Control
         playBtn.addEventListener('click', async () => {
             initAudioContext();
             if (audioCtx.state === 'suspended') { await audioCtx.resume(); }
@@ -350,33 +287,56 @@
             if (!isPlaying) {
                 audioElement.play();
                 isPlaying = true;
-                playBtn.innerHTML = `<i class="fa-solid fa-pause text-xs"></i><span>Pause Preview</span>`;
+                playBtn.textContent = "Pause Preview";
                 visualize();
             } else {
                 audioElement.pause();
                 isPlaying = false;
-                playBtn.innerHTML = `<i class="fa-solid fa-play text-xs"></i><span>Play & Preview</span>`;
+                playBtn.textContent = "Play & Preview";
                 cancelAnimationFrame(animationId);
             }
         });
 
-        // Main Rendering Animation Loop
+        function getColor(index, total) {
+            const c1 = color1Input.value;
+            const c2 = color2Input.value;
+            const c3 = color3Input.value;
+
+            if (selectedPalette === 'mono') return c1;
+            if (selectedPalette === 'dual') return index % 2 === 0 ? c1 : c2;
+            if (selectedPalette === 'tri') {
+                if (index % 3 === 0) return c1;
+                if (index % 3 === 1) return c2;
+                return c3;
+            }
+            if (selectedPalette === 'rainbow') {
+                const hue = (index / total) * 360;
+                return `hsl(${hue}, 80%, 60%)`;
+            }
+            return c1;
+        }
+
         function visualize() {
             const bufferLength = analyser.frequencyBinCount;
             const dataArray = new Uint8Array(bufferLength);
             const W = canvas.width;
             const H = canvas.height;
-            const time = Date.now() * 0.001;
 
             function renderFrame() {
                 animationId = requestAnimationFrame(renderFrame);
                 analyser.getByteFrequencyData(dataArray);
 
-                // Background Clear
+                // Calculate Bass Energy for Beat Pulsing (low frequencies 0 to 10)
+                let bassSum = 0;
+                for (let i = 0; i < 10; i++) { bassSum += dataArray[i]; }
+                const bassAvg = bassSum / 10;
+                const beatScale = 1 + (bassAvg / 255) * 0.12; // Dynamic beat expansion
+
+                // Background
                 ctx.fillStyle = '#090d16';
                 ctx.fillRect(0, 0, W, H);
 
-                // Draw Artwork Background Blur
+                // Blurred Background Artwork
                 if (defaultImgLoaded) {
                     ctx.save();
                     ctx.filter = 'blur(25px) brightness(0.35)';
@@ -387,133 +347,74 @@
                 const mode = visualMode.value;
                 const centerX = W / 2;
                 const centerY = H / 2 - 80;
-                const activeGrad = getPaletteGradient(ctx, 0, H - 300, W, H, time);
 
-                // 1. Frequency Spectrum Bars
+                // VISUALIZERS
                 if (mode === 'bars') {
-                    const barWidth = (W / bufferLength) * 2.2;
-                    let x = 0;
-                    ctx.fillStyle = activeGrad;
-                    for (let i = 0; i < bufferLength; i++) {
-                        const barHeight = (dataArray[i] / 255) * 280;
-                        ctx.fillRect(x, H - 240 - barHeight, barWidth - 2, barHeight);
-                        x += barWidth + 1;
+                    // Re-aligned Centered Spectrum Bars
+                    const numBars = 32;
+                    const barWidth = 8;
+                    const gap = 6;
+                    const totalWidth = numBars * (barWidth + gap);
+                    const startX = centerX - (totalWidth / 2);
+
+                    for (let i = 0; i < numBars; i++) {
+                        const val = dataArray[i * 2] || 0;
+                        const barHeight = (val / 255) * 180;
+                        const x = startX + i * (barWidth + gap);
+                        
+                        ctx.fillStyle = getColor(i, numBars);
+                        ctx.fillRect(x, centerY - (barHeight / 2), barWidth, barHeight);
                     }
-                } 
-                // 2. Circular Wave Pulsar
-                else if (mode === 'circle') {
+                } else if (mode === 'cyberRing') {
+                    // Multi-layer Cyber Pulse Ring
+                    const radius = 125 * beatScale;
                     ctx.save();
                     ctx.translate(centerX, centerY);
                     ctx.beginPath();
-                    const radius = 125;
                     for (let i = 0; i < bufferLength; i++) {
                         const angle = (i * 2 * Math.PI) / bufferLength;
-                        const r = radius + (dataArray[i] / 2.2);
+                        const r = radius + (dataArray[i] / 255) * 45;
                         const x = r * Math.cos(angle);
                         const y = r * Math.sin(angle);
                         if (i === 0) ctx.moveTo(x, y);
                         else ctx.lineTo(x, y);
                     }
                     ctx.closePath();
-                    ctx.strokeStyle = activeGrad;
-                    ctx.lineWidth = 5;
-                    ctx.stroke();
-                    ctx.restore();
-                } 
-                // 3. Spinning Vinyl Record
-                else if (mode === 'vinyl') {
-                    const avg = dataArray.reduce((a, b) => a + b, 0) / bufferLength;
-                    ctx.save();
-                    ctx.translate(centerX, centerY);
-                    ctx.rotate(time * 1.5);
-                    ctx.beginPath();
-                    ctx.arc(0, 0, 155 + (avg * 0.1), 0, Math.PI * 2);
-                    ctx.fillStyle = '#111318';
-                    ctx.fill();
-                    ctx.lineWidth = 6;
-                    ctx.strokeStyle = activeGrad;
-                    ctx.stroke();
-                    
-                    // Grooves
-                    for(let r = 120; r < 150; r += 8) {
-                        ctx.beginPath();
-                        ctx.arc(0, 0, r, 0, Math.PI * 2);
-                        ctx.strokeStyle = 'rgba(255,255,255,0.06)';
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                    ctx.restore();
-                } 
-                // 4. Neon Ambient Aura
-                else if (mode === 'neon') {
-                    const avg = dataArray.reduce((a, b) => a + b, 0) / bufferLength;
-                    const rad = 110 + (avg * 0.6);
-                    const auraGrad = ctx.createRadialGradient(centerX, centerY, 80, centerX, centerY, rad + 60);
-                    auraGrad.addColorStop(0, color1.value + 'aa');
-                    auraGrad.addColorStop(0.5, color2.value + '55');
-                    auraGrad.addColorStop(1, 'transparent');
-
-                    ctx.fillStyle = auraGrad;
-                    ctx.beginPath();
-                    ctx.arc(centerX, centerY, rad + 60, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-                // 5. Cyberpunk Grid Matrix
-                else if (mode === 'matrix') {
-                    ctx.lineWidth = 2;
-                    ctx.strokeStyle = activeGrad;
-                    const cols = 12;
-                    const cellW = W / cols;
-                    for (let i = 0; i < cols; i++) {
-                        const val = (dataArray[i * 2] || 0) / 255;
-                        ctx.strokeRect(i * cellW, H - 280, cellW - 4, -val * 220);
-                    }
-                }
-                // 6. Stereo Oscilloscope Wave
-                else if (mode === 'oscilloscope') {
-                    ctx.beginPath();
+                    ctx.strokeStyle = getColor(0, 10);
                     ctx.lineWidth = 4;
-                    ctx.strokeStyle = activeGrad;
-                    const sliceW = W / bufferLength;
-                    let x = 0;
-                    for (let i = 0; i < bufferLength; i++) {
-                        const v = dataArray[i] / 128.0;
-                        const y = (v * H / 6) + (H / 2 + 160);
-                        if (i === 0) ctx.moveTo(x, y);
-                        else ctx.lineTo(x, y);
-                        x += sliceW;
-                    }
                     ctx.stroke();
-                }
-                // 7. Floating Particle Orbit
-                else if (mode === 'particles') {
-                    const avg = dataArray.reduce((a, b) => a + b, 0) / bufferLength;
-                    ctx.fillStyle = activeGrad;
-                    particleArray.forEach((p, idx) => {
-                        const boost = (dataArray[idx % bufferLength] / 255) * 4;
-                        p.x += p.speedX;
-                        p.y += p.speedY;
-                        if (p.x < 0 || p.x > W) p.speedX *= -1;
-                        if (p.y < 0 || p.y > H) p.speedY *= -1;
-
+                    ctx.restore();
+                } else if (mode === 'particles') {
+                    // Floating Audio Particles
+                    particles.forEach((p, idx) => {
+                        p.y -= p.speedY * (1 + bassAvg / 100);
+                        if (p.y < 0) p.y = H;
                         ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.radius + boost, 0, Math.PI * 2);
+                        ctx.arc(p.x, p.y, p.radius * beatScale, 0, Math.PI * 2);
+                        ctx.fillStyle = getColor(idx, particles.length);
+                        ctx.globalAlpha = p.alpha;
                         ctx.fill();
+                        ctx.globalAlpha = 1.0;
                     });
+                } else if (mode === 'bassAura') {
+                    // Bass Aura Backlight
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, (120 + (bassAvg * 0.4)) * beatScale, 0, Math.PI * 2);
+                    ctx.fillStyle = getColor(0, 1);
+                    ctx.globalAlpha = 0.25;
+                    ctx.fill();
+                    ctx.globalAlpha = 1.0;
                 }
 
-                // Render Central Artwork Disc
+                // CENTER ARTWORK DISC (Pulsing & Optional Rotation)
+                if (rotateArtwork) { rotationAngle += 0.008; }
+
                 ctx.save();
-                ctx.shadowColor = 'rgba(0, 0, 0, 0.6)';
-                ctx.shadowBlur = 35;
                 ctx.translate(centerX, centerY);
+                ctx.scale(beatScale, beatScale); // Beat-driven pulse
+                if (rotateArtwork) { ctx.rotate(rotationAngle); }
 
-                // Rotate Cover Artwork if checkbox enabled
-                if (rotateArtwork.checked) {
-                    rotationAngle += 0.008;
-                    ctx.rotate(rotationAngle);
-                }
-
+                // Circle Disc Clip
                 ctx.beginPath();
                 ctx.arc(0, 0, 110, 0, Math.PI * 2);
                 ctx.closePath();
@@ -527,109 +428,121 @@
                 }
                 ctx.restore();
 
-                // Artwork Border Ring
+                // Outer Disc Ring Border
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.scale(beatScale, beatScale);
                 ctx.beginPath();
-                ctx.arc(centerX, centerY, 110, 0, Math.PI * 2);
-                ctx.lineWidth = 4;
-                ctx.strokeStyle = activeGrad;
+                ctx.arc(0, 0, 110, 0, Math.PI * 2);
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = getColor(0, 1);
                 ctx.stroke();
+                ctx.restore();
 
-                // Text Metadata & Branding Overlay
+                // TEXT METADATA OVERLAYS
                 ctx.textAlign = 'center';
                 
                 // Track Title
                 ctx.fillStyle = '#ffffff';
                 ctx.font = 'bold 26px system-ui';
-                ctx.fillText(trackTitle.value || 'Untitled Track', centerX, centerY + 175);
+                ctx.fillText(document.getElementById('trackTitle').value, centerX, centerY + 180);
 
                 // Artist Name
                 ctx.fillStyle = '#9ca3af';
                 ctx.font = '18px system-ui';
-                ctx.fillText(artistName.value || 'Artist Name', centerX, centerY + 205);
+                ctx.fillText(document.getElementById('artistName').value, centerX, centerY + 210);
 
-                // Branding Footer Watermark
+                // Dual Watermark Footer
                 ctx.fillStyle = '#3b82f6';
-                ctx.font = 'bold 13px system-ui';
-                ctx.fillText('Visualized via @ZikoMazziko & I. Z. Verse Studio', centerX, H - 40);
+                ctx.font = 'bold 14px system-ui';
+                ctx.fillText('Visualized via @ziko.mazziko & @is.zaky.verse', centerX, H - 40);
             }
             renderFrame();
         }
 
-        // Export Video Logic
+        // Robust Video Exporter with Multiple MIME Fallbacks
         recordBtn.addEventListener('click', async () => {
             if (!isPlaying) {
-                alert("Please start playback first before exporting video.");
+                alert("Please click 'Play & Preview' first before exporting.");
                 return;
             }
 
             recordedChunks = [];
             const canvasStream = canvas.captureStream(30);
             const audioTrack = mediaStreamDestination.stream.getAudioTracks()[0];
-            if (audioTrack) canvasStream.addTrack(audioTrack);
+            if (audioTrack) { canvasStream.addTrack(audioTrack); }
 
-            let options = { mimeType: 'video/webm;codecs=vp9,opus' };
-            if (!MediaRecorder.isTypeSupported(options.mimeType)) {
-                options = { mimeType: 'video/webm' };
+            // Find best supported recording MIME type
+            const mimeTypes = [
+                'video/webm;codecs=vp9,opus',
+                'video/webm;codecs=vp8,opus',
+                'video/webm',
+                'video/mp4'
+            ];
+            let selectedMime = mimeTypes.find(type => MediaRecorder.isTypeSupported(type)) || '';
+
+            try {
+                mediaRecorder = selectedMime ? new MediaRecorder(canvasStream, { mimeType: selectedMime }) : new MediaRecorder(canvasStream);
+            } catch (e) {
+                mediaRecorder = new MediaRecorder(canvasStream);
             }
-
-            mediaRecorder = new MediaRecorder(canvasStream, options);
 
             mediaRecorder.ondataavailable = (e) => {
                 if (e.data.size > 0) recordedChunks.push(e.data);
             };
 
             mediaRecorder.onstop = () => {
-                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                const blob = new Blob(recordedChunks, { type: mediaRecorder.mimeType || 'video/webm' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `${(trackTitle.value || 'canvas').replace(/\s+/g, '_')}_Canvas.webm`;
+                a.download = `canvas-${Date.now()}.webm`;
                 a.click();
                 statusText.textContent = "Video exported successfully!";
             };
 
             mediaRecorder.start();
-            statusText.textContent = "Recording Canvas video stream... Click 'Stop & Download' when done.";
-            recordBtn.innerHTML = `<i class="fa-solid fa-square text-xs"></i><span>Stop & Download Video</span>`;
+            statusText.textContent = "Recording video... Click 'Stop & Save Video' when finished.";
+            recordBtn.textContent = "Stop & Save Video";
             recordBtn.onclick = stopRecording;
         });
 
         function stopRecording() {
-            mediaRecorder.stop();
-            recordBtn.innerHTML = `<i class="fa-solid fa-video text-xs"></i><span>Export 9:16 Video (.webm)</span>`;
+            if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+                mediaRecorder.stop();
+            }
+            recordBtn.textContent = "Export 9:16 Video (.webm / .mp4)";
             recordBtn.onclick = null;
         }
 
-        // Clear Inputs and Reset Config
+        // Reset All Inputs & Configuration
         resetBtn.addEventListener('click', () => {
-            if (audioElement) {
-                audioElement.pause();
-                audioElement = null;
-            }
+            if (audioElement) { audioElement.pause(); }
             isPlaying = false;
+            defaultImgLoaded = false;
+            rotateArtwork = false;
             cancelAnimationFrame(animationId);
 
             audioFile.value = '';
             imageFile.value = '';
-            audioNameDisplay.textContent = '';
-            imageNameDisplay.textContent = '';
-            trackTitle.value = 'Midnight Echoes';
-            artistName.value = 'Ziko Mazziko';
-            rotateArtwork.checked = false;
+            document.getElementById('trackTitle').value = 'Midnight Echoes';
+            document.getElementById('artistName').value = 'Ziko Mazziko';
             visualMode.value = 'bars';
-            colorMode.value = 'dual';
-            color1.value = '#3b82f6';
-            color2.value = '#8b5cf6';
-            color3.value = '#ec4899';
+            
+            color1Input.value = '#3b82f6';
+            color2Input.value = '#8b5cf6';
+            color3Input.value = '#ec4899';
+
+            rotateIndicator.classList.remove('bg-emerald-400');
+            rotateIndicator.classList.add('bg-gray-600');
+            rotateText.textContent = 'Artwork Rotation: OFF';
 
             playBtn.disabled = true;
             recordBtn.disabled = true;
-            playBtn.innerHTML = `<i class="fa-solid fa-play text-xs"></i><span>Play & Preview</span>`;
-            statusText.textContent = "Inputs cleared and configuration reset.";
-            
-            defaultImgLoaded = false;
-            coverImg = new Image();
-            drawDefaultArt();
+            playBtn.textContent = "Play & Preview";
+            statusText.textContent = "Configuration reset completed.";
+
+            drawPlaceholderArt();
         });
     </script>
 </body>
