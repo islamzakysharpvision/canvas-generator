@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Visualizer & Spotify Canvas Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #0b0f19; color: #f3f4f6; font-family: system-ui, -apple-system, sans-serif; }
+        .glow-box { box-shadow: 0 0 25px rgba(59, 130, 246, 0.15); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="border-b border-gray-800 bg-gray-900/50 backdrop-blur py-4 px-6 sticky top-0 z-50 flex justify-between items-center">
+        <div class="flex items-center space-x-3">
+            <div class="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+            <h1 class="font-bold tracking-wider text-lg">CANVAS <span class="text-blue-500">STUDIO</span></h1>
+        </div>
+        <div class="text-xs text-gray-400 bg-gray-800 px-3 py-1.5 rounded-full border border-gray-700">9:16 Vertical Reel & Canvas Format</div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-6xl mx-auto w-full p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
+        
+        <!-- Controls Column -->
+        <div class="lg:col-span-5 bg-gray-900/80 border border-gray-800 p-6 rounded-2xl glow-box flex flex-col justify-between space-y-6">
+            <div class="space-y-5">
+                <h2 class="text-xl font-semibold text-white border-b border-gray-800 pb-3">Track & Visual Config</h2>
+                
+                <!-- Audio Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">1. Upload Audio (.mp3 / .wav)</label>
+                    <input type="file" id="audioFile" accept="audio/*" class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-2"/>
+                </div>
+
+                <!-- Artwork Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-300 mb-2">2. Upload Cover Artwork</label>
+                    <input type="file" id="imageFile" accept="image/*" class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-gray-800 file:text-gray-200 hover:file:bg-gray-700 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-2"/>
+                </div>
+
+                <!-- Metadata Inputs -->
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Track Title</label>
+                        <input type="text" id="trackTitle" value="Midnight Echoes" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500"/>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-400 mb-1">Artist Name</label>
+                        <input type="text" id="artistName" value="Ziko Mazziko" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500"/>
+                    </div>
+                </div>
+
+                <!-- Visual Mode Selection -->
+                <div>
+                    <label class="block text-xs font-medium text-gray-400 mb-1">Visualizer Style</label>
+                    <select id="visualMode" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+                        <option value="bars">Frequency Spectrum Bars</option>
+                        <option value="circle">Circular Wave Pulsar</option>
+                        <option value="vinyl">Spinning Vinyl Record</option>
+                        <option value="neon">Neon Ambient Aura</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="space-y-3 pt-4 border-t border-gray-800">
+                <button id="playBtn" disabled class="w-full py-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed font-medium rounded-xl transition shadow-lg shadow-blue-600/20">Play & Preview</button>
+                <button id="recordBtn" disabled class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 disabled:cursor-not-allowed font-medium rounded-xl transition shadow-lg shadow-emerald-600/20">Export 9:16 Video (.webm)</button>
+                <div id="statusText" class="text-xs text-center text-gray-400 h-4"></div>
+            </div>
+        </div>
+
+        <!-- Preview Column (9:16 Vertical Canvas) -->
+        <div class="lg:col-span-7 flex flex-col items-center justify-center bg-gray-900/40 border border-gray-800 rounded-2xl p-6 relative overflow-hidden">
+            <div class="relative w-[300px] h-[533px] bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800 flex flex-col items-center justify-center">
+                <canvas id="canvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
+            </div>
+            <p class="text-xs text-gray-500 mt-3">Exact 9:16 aspect ratio optimized for Instagram Reels & Spotify Canvas</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center text-xs text-gray-500 border-t border-gray-800">
+        Client-side audio visualizer engine • Powered by Web Audio API & HTML5 Canvas
+    </footer>
+
+    <!-- Application Script -->
+    <script>
+        const audioFile = document.getElementById('audioFile');
+        const imageFile = document.getElementById('imageFile');
+        const playBtn = document.getElementById('playBtn');
+        const recordBtn = document.getElementById('recordBtn');
+        const statusText = document.getElementById('statusText');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const visualMode = document.getElementById('visualMode');
+
+        let audioCtx, audioElement, audioSource, analyser, mediaStreamDestination, mediaRecorder;
+        let recordedChunks = [];
+        let isPlaying = false;
+        let coverImg = new Image();
+        let defaultImgLoaded = false;
+        let animationId;
+
+        // Default placeholder artwork generator
+        function drawDefaultArt() {
+            ctx.fillStyle = '#111827';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#374151';
+            ctx.font = 'bold 32px system-ui';
+            ctx.textAlign = 'center';
+            ctx.fillText('NO ARTWORK', canvas.width / 2, canvas.height / 2);
+        }
+        drawDefaultArt();
+
+        imageFile.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    coverImg.src = event.target.result;
+                    coverImg.onload = () => { defaultImgLoaded = true; };
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        audioFile.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const url = URL.createObjectURL(file);
+                if (audioElement) { audioElement.pause(); }
+                audioElement = new Audio(url);
+                audioElement.crossOrigin = "anonymous";
+                audioElement.loop = true;
+
+                audioElement.oncanplaythrough = () => {
+                    playBtn.disabled = false;
+                    recordBtn.disabled = false;
+                    statusText.textContent = "Audio loaded and ready!";
+                };
+            }
+        });
+
+        function initAudioContext() {
+            if (audioCtx) return;
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 256;
+
+            audioSource = audioCtx.createMediaElementSource(audioElement);
+            
+            // Connect to speakers & stream destination for recording
+            mediaStreamDestination = audioCtx.createMediaStreamDestination();
+            audioSource.connect(analyser);
+            analyser.connect(audioCtx.destination);
+            analyser.connect(mediaStreamDestination);
+        }
+
+        playBtn.addEventListener('click', async () => {
+            initAudioContext();
+            if (audioCtx.state === 'suspended') { await audioCtx.resume(); }
+
+            if (!isPlaying) {
+                audioElement.play();
+                isPlaying = true;
+                playBtn.textContent = "Pause Preview";
+                visualize();
+            } else {
+                audioElement.pause();
+                isPlaying = false;
+                playBtn.textContent = "Play & Preview";
+                cancelAnimationFrame(animationId);
+            }
+        });
+
+        function visualize() {
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
+            const W = canvas.width;
+            const H = canvas.height;
+
+            function renderFrame() {
+                animationId = requestAnimationFrame(renderFrame);
+                analyser.getByteFrequencyData(dataArray);
+
+                // Background
+                ctx.fillStyle = '#090d16';
+                ctx.fillRect(0, 0, W, H);
+
+                // Draw Artwork Background / Blur effect
+                if (defaultImgLoaded) {
+                    ctx.save();
+                    ctx.filter = 'blur(20px) brightness(0.4)';
+                    ctx.drawImage(coverImg, 0, 0, W, H);
+                    ctx.restore();
+                }
+
+                const mode = visualMode.value;
+                const centerX = W / 2;
+                const centerY = H / 2 - 80;
+
+                if (mode === 'bars') {
+                    // Spectrum bars at bottom
+                    const barWidth = (W / bufferLength) * 2.5;
+                    let x = 0;
+                    for (let i = 0; i < bufferLength; i++) {
+                        const barHeight = (dataArray[i] / 255) * 250;
+                        ctx.fillStyle = `rgb(${dataArray[i]}, 120, 255)`;
+                        ctx.fillRect(x, H - 250 - barHeight, barWidth - 2, barHeight);
+                        x += barWidth + 1;
+                    }
+                } else if (mode === 'circle') {
+                    // Circular pulsing wave
+                    ctx.save();
+                    ctx.translate(centerX, centerY);
+                    ctx.beginPath();
+                    const radius = 120;
+                    for (let i = 0; i < bufferLength; i++) {
+                        const angle = (i * 2 * Math.PI) / bufferLength;
+                        const r = radius + (dataArray[i] / 2);
+                        const x = r * Math.cos(angle);
+                        const y = r * Math.sin(angle);
+                        if (i === 0) ctx.moveTo(x, y);
+                        else ctx.lineTo(x, y);
+                    }
+                    ctx.closePath();
+                    ctx.strokeStyle = '#3b82f6';
+                    ctx.lineWidth = 4;
+                    ctx.stroke();
+                    ctx.restore();
+                } else if (mode === 'vinyl') {
+                    // Vinyl record spin effect
+                    const avg = dataArray.reduce((a, b) => a + b, 0) / bufferLength;
+                    ctx.save();
+                    ctx.translate(centerX, centerY);
+                    ctx.rotate(Date.now() * 0.002);
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 150 + (avg * 0.1), 0, Math.PI * 2);
+                    ctx.fillStyle = '#111';
+                    ctx.fill();
+                    ctx.lineWidth = 6;
+                    ctx.strokeStyle = '#3b82f6';
+                    ctx.stroke();
+                    ctx.restore();
+                } else if (mode === 'neon') {
+                    // Neon Aura
+                    const avg = dataArray.reduce((a, b) => a + b, 0) / bufferLength;
+                    ctx.beginPath();
+                    ctx.arc(centerX, centerY, 100 + (avg * 0.5), 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(59, 130, 246, 0.15)';
+                    ctx.fill();
+                }
+
+                // Draw Center Artwork Album Disc
+                ctx.save();
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                ctx.shadowBlur = 30;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, 110, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+                if (defaultImgLoaded) {
+                    ctx.drawImage(coverImg, centerX - 110, centerY - 110, 220, 220);
+                } else {
+                    ctx.fillStyle = '#1f2937';
+                    ctx.fillRect(centerX - 110, centerY - 110, 220, 220);
+                }
+                ctx.restore();
+
+                // Outer Ring Border
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, 110, 0, Math.PI * 2);
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = '#ffffff20';
+                ctx.stroke();
+
+                // Text Metadata & Watermark Overlay
+                ctx.textAlign = 'center';
+                
+                // Track Title
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 26px system-ui';
+                ctx.fillText(document.getElementById('trackTitle').value, centerX, centerY + 170);
+
+                // Artist Name
+                ctx.fillStyle = '#9ca3af';
+                ctx.font = '18px system-ui';
+                ctx.fillText(document.getElementById('artistName').value, centerX, centerY + 200);
+
+                // Viral Watermark Footer
+                ctx.fillStyle = '#3b82f6';
+                ctx.font = 'bold 14px system-ui';
+                ctx.fillText('Visualized via @ZikoMazziko', centerX, H - 40);
+            }
+            renderFrame();
+        }
+
+        // Video Recording Logic
+        recordBtn.addEventListener('click', async () => {
+            if (!isPlaying) {
+                alert("Please start playback first before recording.");
+                return;
+            }
+
+            recordedChunks = [];
+            const canvasStream = canvas.captureStream(30); // 30 FPS
+            const audioTrack = mediaStreamDestination.stream.getAudioTracks()[0];
+            canvasStream.addTrack(audioTrack);
+
+            const options = { mimeType: 'video/webm;codecs=vp9,opus' };
+            if (!MediaRecorder.isTypeSupported(options.mimeType)) {
+                options.mimeType = 'video/webm';
+            }
+
+            mediaRecorder = new MediaRecorder(canvasStream, options);
+
+            mediaRecorder.ondataavailable = (e) => {
+                if (e.data.size > 0) recordedChunks.push(e.data);
+            };
+
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'spotify-canvas-visualizer.webm';
+                a.click();
+                statusText.textContent = "Video exported successfully!";
+            };
+
+            mediaRecorder.start();
+            statusText.textContent = "Recording 9:16 video... Let track play, click stop when ready.";
+            recordBtn.textContent = "Stop & Save Video";
+            recordBtn.onclick = stopRecording;
+        });
+
+        function stopRecording() {
+            mediaRecorder.stop();
+            recordBtn.textContent = "Export 9:16 Video (.webm)";
+            recordBtn.onclick = null;
+            // re-bind original listener
+            location.reload();
+        }
+    </script>
+</body>
+</html>
