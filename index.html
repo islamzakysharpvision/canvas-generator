@@ -8,6 +8,8 @@
     <style>
         body { background-color: #0b0f19; color: #f3f4f6; font-family: system-ui, -apple-system, sans-serif; }
         .glow-box { box-shadow: 0 0 30px rgba(59, 130, 246, 0.12); }
+        .color-box { transition: all 0.2s ease-in-out; }
+        .color-box:hover { transform: translateY(-2px); }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
@@ -29,7 +31,7 @@
             Supporting Independent Artists Content Creation & Growth
         </h2>
         <p class="text-sm md:text-base text-gray-400 max-w-2xl mx-auto">
-            Generate Free Unlimited Video Canvas for your music, Share it & Go Viral at Ease
+            Generate Free Unlimited High-Quality 1080p Video Canvas for your music, Share it & Go Viral at Ease
         </p>
     </section>
 
@@ -49,10 +51,35 @@
                     <input type="file" id="audioFile" accept="audio/*" class="w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-1.5"/>
                 </div>
 
-                <!-- Artwork Upload -->
+                <!-- Artwork Upload & Rotation Side-by-Side -->
                 <div>
-                    <label class="block text-xs font-medium text-gray-300 mb-1.5">2. Upload Cover Artwork</label>
-                    <input type="file" id="imageFile" accept="image/*" class="w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gray-800 file:text-gray-200 hover:file:bg-gray-700 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-1.5"/>
+                    <label class="block text-xs font-medium text-gray-300 mb-1.5">2. Upload Cover Artwork & Motion</label>
+                    <div class="grid grid-cols-12 gap-2">
+                        <div class="col-span-8">
+                            <input type="file" id="imageFile" accept="image/*" class="w-full text-xs text-gray-400 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gray-800 file:text-gray-200 hover:file:bg-gray-700 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-1.5"/>
+                        </div>
+                        <div class="col-span-4 flex items-center">
+                            <button type="button" id="rotateToggleBtn" class="w-full h-full py-2 bg-gray-950 hover:bg-gray-800 border border-gray-800 text-[11px] font-medium rounded-xl text-gray-300 transition flex items-center justify-center space-x-1.5">
+                                <span id="rotateIndicator" class="w-2 h-2 rounded-full bg-gray-600"></span>
+                                <span id="rotateText">Rotate: OFF</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio Duration / Range Selector -->
+                <div>
+                    <label class="block text-xs font-medium text-gray-300 mb-1.5">3. Export Duration Range (Seconds)</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">Start Time (sec)</label>
+                            <input type="number" id="startTime" value="0" min="0" step="1" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500"/>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] text-gray-400 mb-0.5">End Time (sec)</label>
+                            <input type="number" id="endTime" value="15" min="1" step="1" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500"/>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Metadata Inputs -->
@@ -77,59 +104,70 @@
                     </select>
                 </div>
 
-                <!-- Color Mode & Custom Pickers -->
+                <!-- Enhanced 4-Color Section -->
                 <div>
                     <label class="block text-xs font-medium text-gray-400 mb-1.5">Color Palette Mode</label>
                     <div class="grid grid-cols-3 gap-2 mb-2" id="paletteGroup">
-                        <button type="button" data-palette="auto" class="palette-btn py-1.5 text-[11px] font-medium rounded-lg border border-blue-500 bg-blue-600/20 text-blue-400">Artwork Color</button>
+                        <button type="button" data-palette="auto" class="palette-btn py-1.5 text-[11px] font-medium rounded-lg border border-blue-500 bg-blue-600/20 text-blue-400">Artwork Auto</button>
                         <button type="button" data-palette="white" class="palette-btn py-1.5 text-[11px] font-medium rounded-lg border border-gray-800 bg-gray-950 text-gray-400 hover:border-gray-700">Clean White</button>
-                        <button type="button" id="shuffleBtn" class="py-1.5 text-[11px] font-medium rounded-lg border border-gray-800 bg-gray-950 text-gray-400 hover:border-gray-700">Random Shuffle 🎲</button>
+                        <button type="button" id="shuffleBtn" class="py-1.5 text-[11px] font-medium rounded-lg border border-gray-800 bg-gray-950 text-gray-400 hover:border-gray-700">Shuffle 🎲</button>
                     </div>
 
-                    <div class="flex items-center space-x-3 bg-gray-950 p-2 border border-gray-800 rounded-xl">
-                        <div class="flex items-center space-x-1.5">
-                            <label class="text-[10px] text-gray-400">Color 1:</label>
-                            <input type="color" id="color1" value="#3b82f6" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0"/>
+                    <!-- Sleek 4-Color Input Boxes -->
+                    <div class="grid grid-cols-4 gap-2 bg-gray-950 p-2.5 border border-gray-800 rounded-xl">
+                        <div class="color-box flex flex-col items-center p-1.5 bg-gray-900/80 rounded-lg border border-gray-800">
+                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">Color 1</label>
+                            <input type="color" id="color1" value="#3b82f6" class="w-7 h-7 rounded cursor-pointer bg-transparent border-0"/>
                         </div>
-                        <div class="flex items-center space-x-1.5">
-                            <label class="text-[10px] text-gray-400">Color 2:</label>
-                            <input type="color" id="color2" value="#8b5cf6" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0"/>
+                        <div class="color-box flex flex-col items-center p-1.5 bg-gray-900/80 rounded-lg border border-gray-800">
+                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">Color 2</label>
+                            <input type="color" id="color2" value="#8b5cf6" class="w-7 h-7 rounded cursor-pointer bg-transparent border-0"/>
                         </div>
-                        <div class="flex items-center space-x-1.5">
-                            <label class="text-[10px] text-gray-400">Color 3:</label>
-                            <input type="color" id="color3" value="#ec4899" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0"/>
+                        <div class="color-box flex flex-col items-center p-1.5 bg-gray-900/80 rounded-lg border border-gray-800">
+                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">Color 3</label>
+                            <input type="color" id="color3" value="#ec4899" class="w-7 h-7 rounded cursor-pointer bg-transparent border-0"/>
+                        </div>
+                        <div class="color-box flex flex-col items-center p-1.5 bg-gray-900/80 rounded-lg border border-gray-800">
+                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">Color 4</label>
+                            <input type="color" id="color4" value="#10b981" class="w-7 h-7 rounded cursor-pointer bg-transparent border-0"/>
                         </div>
                     </div>
-                </div>
-
-                <!-- Rotate Artwork Button Toggle -->
-                <div>
-                    <button type="button" id="rotateToggleBtn" class="w-full py-2 bg-gray-950 hover:bg-gray-800 border border-gray-800 text-xs font-medium rounded-xl text-gray-300 transition flex items-center justify-center space-x-2">
-                        <span id="rotateIndicator" class="w-2 h-2 rounded-full bg-gray-600"></span>
-                        <span id="rotateText">Artwork Rotation: OFF</span>
-                    </button>
                 </div>
             </div>
 
-            <!-- Action Controls & Reset -->
+            <!-- Side-by-Side Action Buttons Grid -->
             <div class="space-y-2.5 pt-3 border-t border-gray-800">
-                <button id="playBtn" disabled class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-xs rounded-xl transition shadow-lg shadow-blue-600/20 text-white">Play & Preview</button>
-                <button id="recordBtn" disabled class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-xs rounded-xl transition shadow-lg shadow-emerald-600/20 text-white">Export 9:16 Video (.webm)</button>
-                <button id="resetBtn" class="w-full py-2 bg-gray-950 hover:bg-red-950/40 border border-gray-800 hover:border-red-800/50 text-gray-400 hover:text-red-400 text-xs font-medium rounded-xl transition">Clear Inputs & Reset Config</button>
+                <div class="grid grid-cols-3 gap-2">
+                    <button id="playBtn" disabled class="py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-[11px] rounded-xl transition text-white shadow-md">
+                        Preview ▶
+                    </button>
+                    <button id="startRecBtn" disabled class="py-2.5 bg-amber-600 hover:bg-amber-500 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-[11px] rounded-xl transition text-white shadow-md">
+                        Record 🔴
+                    </button>
+                    <button id="exportBtn" disabled class="py-2.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-[11px] rounded-xl transition text-white shadow-md">
+                        Export 💾
+                    </button>
+                </div>
+
+                <!-- Prominent Reset Button at the Bottom -->
+                <button id="resetBtn" class="w-full py-2 bg-gray-950 hover:bg-red-950/40 border border-gray-800 hover:border-red-800/50 text-gray-400 hover:text-red-400 text-xs font-medium rounded-xl transition">
+                    Clear Inputs & Reset Config
+                </button>
                 <div id="statusText" class="text-[11px] text-center text-blue-400 min-h-[16px]"></div>
             </div>
         </div>
 
-        <!-- Preview Column (9:16 Vertical Canvas) -->
+        <!-- Preview Column (1080p Internal Canvas Rendered in 9:16 Frame) -->
         <div class="lg:col-span-7 flex flex-col items-center justify-center bg-gray-900/40 border border-gray-800 rounded-2xl p-4 md:p-6 relative overflow-hidden">
             <div class="relative w-[300px] h-[533px] bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800 flex flex-col items-center justify-center">
-                <canvas id="canvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
+                <!-- True 1080x1920 Full HD Canvas Buffer -->
+                <canvas id="canvas" width="1080" height="1920" class="w-full h-full object-cover"></canvas>
             </div>
-            <p class="text-xs text-gray-400 mt-3 text-center">Exact 9:16 aspect ratio optimized for Social Media & Music Streaming Platforms</p>
+            <p class="text-xs text-gray-400 mt-3 text-center">Full 1080×1920 HD 60FPS Video Canvas • Optimized for Social Media & Streaming</p>
         </div>
     </main>
 
-    <!-- Learn More & Studio Websites Links -->
+    <!-- Learn More Section -->
     <section class="max-w-6xl mx-auto w-full px-6 py-6 border-t border-gray-800/80 my-4">
         <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-gray-900/50 p-4 rounded-2xl border border-gray-800">
             <div>
@@ -147,17 +185,44 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-4 text-center text-xs text-gray-500 border-t border-gray-800">
-        Safe & Secured audio visualizer engine • Powered by I. Z. Verse Studio
+    <!-- Comprehensive Social & Ecosystem Footer Navbar -->
+    <footer class="bg-gray-950 border-t border-gray-800/80 py-8 px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 text-xs text-gray-400">
+            <div>
+                <h5 class="text-white font-bold mb-2">Ziko Mazziko Canvas Studio</h5>
+                <p class="text-gray-500 leading-relaxed">Free client-side high-resolution visualizer engine designed for independent producers and creators worldwide.</p>
+            </div>
+            <div>
+                <h5 class="text-white font-bold mb-2">Music & Sonic Portals</h5>
+                <ul class="space-y-1.5">
+                    <li><a href="https://ziko-mazziko.izverse.store" target="_blank" class="hover:text-blue-400 transition">Ziko Mazziko Store</a></li>
+                    <li><a href="https://izverse.store" target="_blank" class="hover:text-blue-400 transition">I. Z. Verse Studio Hub</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-bold mb-2">Social Profiles</h5>
+                <ul class="space-y-1.5">
+                    <li><a href="https://instagram.com/ziko.mazziko" target="_blank" class="hover:text-blue-400 transition">Instagram: @ziko.mazziko</a></li>
+                    <li><a href="https://instagram.com/is.zaky.verse" target="_blank" class="hover:text-blue-400 transition">Instagram: @is.zaky.verse</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-white font-bold mb-2">Security & Privacy</h5>
+                <p class="text-gray-500">100% Client-Side Processing. No files uploaded to external servers.</p>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto mt-6 pt-4 border-t border-gray-900 text-center text-[11px] text-gray-600">
+            © 2026 Ziko Mazziko & I. Z. Verse Studio. All Rights Reserved.
+        </div>
     </footer>
 
-    <!-- Application Engine Script -->
+    <!-- Engine Script -->
     <script>
         const audioFile = document.getElementById('audioFile');
         const imageFile = document.getElementById('imageFile');
         const playBtn = document.getElementById('playBtn');
-        const recordBtn = document.getElementById('recordBtn');
+        const startRecBtn = document.getElementById('startRecBtn');
+        const exportBtn = document.getElementById('exportBtn');
         const resetBtn = document.getElementById('resetBtn');
         const shuffleBtn = document.getElementById('shuffleBtn');
         const statusText = document.getElementById('statusText');
@@ -165,9 +230,13 @@
         const ctx = canvas.getContext('2d');
         const visualMode = document.getElementById('visualMode');
 
+        const startTimeInput = document.getElementById('startTime');
+        const endTimeInput = document.getElementById('endTime');
+
         const color1Input = document.getElementById('color1');
         const color2Input = document.getElementById('color2');
         const color3Input = document.getElementById('color3');
+        const color4Input = document.getElementById('color4');
         const paletteBtns = document.querySelectorAll('.palette-btn');
 
         const rotateToggleBtn = document.getElementById('rotateToggleBtn');
@@ -185,12 +254,13 @@
         let selectedPalette = 'auto';
         let rotationAngle = 0;
         let extractedColor = '#3b82f6';
+        let recordedBlob = null;
 
-        let particles = Array.from({ length: 40 }, () => ({
-            x: Math.random() * 540,
-            y: Math.random() * 960,
-            radius: Math.random() * 3 + 1,
-            speedY: Math.random() * 1.5 + 0.5,
+        let particles = Array.from({ length: 60 }, () => ({
+            x: Math.random() * 1080,
+            y: Math.random() * 1920,
+            radius: Math.random() * 6 + 2,
+            speedY: Math.random() * 2.5 + 1,
             alpha: Math.random() * 0.7 + 0.3
         }));
 
@@ -211,13 +281,14 @@
             color1Input.value = randomColor();
             color2Input.value = randomColor();
             color3Input.value = randomColor();
+            color4Input.value = randomColor();
             
             paletteBtns.forEach(b => {
                 b.classList.remove('border-blue-500', 'bg-blue-600/20', 'text-blue-400');
                 b.classList.add('border-gray-800', 'bg-gray-950', 'text-gray-400');
             });
             selectedPalette = 'custom';
-            statusText.textContent = "Shuffled new custom colors!";
+            statusText.textContent = "Shuffled 4 custom colors!";
         });
 
         rotateToggleBtn.addEventListener('click', () => {
@@ -225,11 +296,11 @@
             if (rotateArtwork) {
                 rotateIndicator.classList.remove('bg-gray-600');
                 rotateIndicator.classList.add('bg-emerald-400');
-                rotateText.textContent = 'Artwork Rotation: ON';
+                rotateText.textContent = 'Rotate: ON';
             } else {
                 rotateIndicator.classList.remove('bg-emerald-400');
                 rotateIndicator.classList.add('bg-gray-600');
-                rotateText.textContent = 'Artwork Rotation: OFF';
+                rotateText.textContent = 'Rotate: OFF';
             }
         });
 
@@ -238,12 +309,12 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.fillStyle = '#1f2937';
             ctx.beginPath();
-            ctx.arc(canvas.width / 2, canvas.height / 2 - 80, 110, 0, Math.PI * 2);
+            ctx.arc(canvas.width / 2, canvas.height / 2 - 120, 220, 0, Math.PI * 2);
             ctx.fill();
             ctx.fillStyle = '#4b5563';
-            ctx.font = 'bold 16px system-ui';
+            ctx.font = 'bold 32px system-ui';
             ctx.textAlign = 'center';
-            ctx.fillText('NO ARTWORK LOADED', canvas.width / 2, canvas.height / 2 - 80);
+            ctx.fillText('NO ARTWORK LOADED', canvas.width / 2, canvas.height / 2 - 120);
         }
         drawPlaceholderArt();
 
@@ -294,12 +365,12 @@
                 if (audioElement) { audioElement.pause(); }
                 audioElement = new Audio(url);
                 audioElement.crossOrigin = "anonymous";
-                audioElement.loop = true;
 
-                audioElement.oncanplaythrough = () => {
+                audioElement.onloadedmetadata = () => {
+                    endTimeInput.value = Math.floor(audioElement.duration);
                     playBtn.disabled = false;
-                    recordBtn.disabled = false;
-                    statusText.textContent = "Audio loaded and ready!";
+                    startRecBtn.disabled = false;
+                    statusText.textContent = `Audio loaded (${Math.floor(audioElement.duration)}s total)`;
                 };
             }
         });
@@ -313,7 +384,6 @@
             audioSource = audioCtx.createMediaElementSource(audioElement);
             mediaStreamDestination = audioCtx.createMediaStreamDestination();
             
-            // Route to both speaker output and destination recorder stream
             audioSource.connect(analyser);
             analyser.connect(audioCtx.destination);
             analyser.connect(mediaStreamDestination);
@@ -324,14 +394,16 @@
             if (audioCtx.state === 'suspended') { await audioCtx.resume(); }
 
             if (!isPlaying) {
+                const startSec = parseFloat(startTimeInput.value) || 0;
+                audioElement.currentTime = startSec;
                 audioElement.play();
                 isPlaying = true;
-                playBtn.textContent = "Pause Preview";
+                playBtn.textContent = "Pause ⏸";
                 visualize();
             } else {
                 audioElement.pause();
                 isPlaying = false;
-                playBtn.textContent = "Play & Preview";
+                playBtn.textContent = "Preview ▶";
                 cancelAnimationFrame(animationId);
             }
         });
@@ -343,18 +415,32 @@
             const c1 = color1Input.value;
             const c2 = color2Input.value;
             const c3 = color3Input.value;
-            if (index % 3 === 0) return c1;
-            if (index % 3 === 1) return c2;
-            return c3;
+            const c4 = color4Input.value;
+            
+            const mod = index % 4;
+            if (mod === 0) return c1;
+            if (mod === 1) return c2;
+            if (mod === 2) return c3;
+            return c4;
         }
 
         function visualize() {
             const bufferLength = analyser.frequencyBinCount;
             const dataArray = new Uint8Array(bufferLength);
-            const W = canvas.width;
-            const H = canvas.height;
+            const W = canvas.width;  // 1080
+            const H = canvas.height; // 1920
 
             function renderFrame() {
+                // Auto-stop at duration limit
+                const endSec = parseFloat(endTimeInput.value) || audioElement.duration;
+                if (audioElement.currentTime >= endSec) {
+                    audioElement.pause();
+                    isPlaying = false;
+                    playBtn.textContent = "Preview ▶";
+                    if (isRecording) stopRecording();
+                    return;
+                }
+
                 animationId = requestAnimationFrame(renderFrame);
                 analyser.getByteFrequencyData(dataArray);
 
@@ -368,25 +454,25 @@
 
                 if (defaultImgLoaded) {
                     ctx.save();
-                    ctx.filter = 'blur(25px) brightness(0.35)';
+                    ctx.filter = 'blur(40px) brightness(0.35)';
                     ctx.drawImage(coverImg, 0, 0, W, H);
                     ctx.restore();
                 }
 
                 const mode = visualMode.value;
                 const centerX = W / 2;
-                const centerY = H / 2 - 80;
+                const centerY = H / 2 - 160;
 
                 if (mode === 'bars') {
                     const numBars = 32;
-                    const barWidth = 8;
-                    const gap = 6;
+                    const barWidth = 16;
+                    const gap = 12;
                     const totalWidth = numBars * (barWidth + gap);
                     const startX = centerX - (totalWidth / 2);
 
                     for (let i = 0; i < numBars; i++) {
                         const val = dataArray[i * 2] || 0;
-                        const barHeight = (val / 255) * 180;
+                        const barHeight = (val / 255) * 360;
                         const x = startX + i * (barWidth + gap);
                         
                         ctx.fillStyle = getColor(i, numBars);
@@ -405,7 +491,7 @@
                     });
                 } else if (mode === 'bassAura') {
                     ctx.beginPath();
-                    ctx.arc(centerX, centerY, (120 + (bassAvg * 0.4)) * beatScale, 0, Math.PI * 2);
+                    ctx.arc(centerX, centerY, (240 + (bassAvg * 0.8)) * beatScale, 0, Math.PI * 2);
                     ctx.fillStyle = getColor(0, 1);
                     ctx.globalAlpha = 0.25;
                     ctx.fill();
@@ -420,15 +506,15 @@
                 if (rotateArtwork) { ctx.rotate(rotationAngle); }
 
                 ctx.beginPath();
-                ctx.arc(0, 0, 110, 0, Math.PI * 2);
+                ctx.arc(0, 0, 220, 0, Math.PI * 2);
                 ctx.closePath();
                 ctx.clip();
 
                 if (defaultImgLoaded) {
-                    ctx.drawImage(coverImg, -110, -110, 220, 220);
+                    ctx.drawImage(coverImg, -220, -220, 440, 440);
                 } else {
                     ctx.fillStyle = '#1f2937';
-                    ctx.fillRect(-110, -110, 220, 220);
+                    ctx.fillRect(-220, -220, 440, 440);
                 }
                 ctx.restore();
 
@@ -436,8 +522,8 @@
                 ctx.translate(centerX, centerY);
                 ctx.scale(beatScale, beatScale);
                 ctx.beginPath();
-                ctx.arc(0, 0, 110, 0, Math.PI * 2);
-                ctx.lineWidth = 3;
+                ctx.arc(0, 0, 220, 0, Math.PI * 2);
+                ctx.lineWidth = 6;
                 ctx.strokeStyle = getColor(0, 1);
                 ctx.stroke();
                 ctx.restore();
@@ -445,26 +531,24 @@
                 ctx.textAlign = 'center';
                 
                 ctx.fillStyle = '#ffffff';
-                ctx.font = 'bold 26px system-ui';
-                ctx.fillText(document.getElementById('trackTitle').value, centerX, centerY + 180);
+                ctx.font = 'bold 52px system-ui';
+                ctx.fillText(document.getElementById('trackTitle').value, centerX, centerY + 360);
 
                 ctx.fillStyle = '#9ca3af';
-                ctx.font = '18px system-ui';
-                ctx.fillText(document.getElementById('artistName').value, centerX, centerY + 210);
+                ctx.font = '36px system-ui';
+                ctx.fillText(document.getElementById('artistName').value, centerX, centerY + 420);
 
                 ctx.fillStyle = '#3b82f6';
-                ctx.font = 'bold 14px system-ui';
-                ctx.fillText('Visualized via @ziko.mazziko & @is.zaky.verse', centerX, H - 40);
+                ctx.font = 'bold 28px system-ui';
+                ctx.fillText('Visualized via @ziko.mazziko & @is.zaky.verse', centerX, H - 80);
             }
             renderFrame();
         }
 
-        // FAILSAFE RECORDING ENGINE (CAPTURES RAW CANVAS STREAM DIRECTLY)
-        recordBtn.addEventListener('click', async () => {
-            if (!isPlaying) {
-                alert("Please click 'Play & Preview' first before exporting.");
-                return;
-            }
+        // HIGH-BITRATE 1080p RECORDING ENGINE
+        startRecBtn.addEventListener('click', async () => {
+            initAudioContext();
+            if (audioCtx.state === 'suspended') { await audioCtx.resume(); }
 
             if (isRecording) {
                 stopRecording();
@@ -473,67 +557,70 @@
 
             recordedChunks = [];
             
-            // Capture canvas video stream
-            const canvasStream = canvas.captureStream(30); 
-            
-            // Add WebAudio audio track if present
+            // 60 FPS Capture Stream from 1080p Canvas
+            const canvasStream = canvas.captureStream(60); 
             if (mediaStreamDestination && mediaStreamDestination.stream) {
                 const audioTracks = mediaStreamDestination.stream.getAudioTracks();
-                if (audioTracks.length > 0) {
-                    canvasStream.addTrack(audioTracks[0]);
-                }
+                if (audioTracks.length > 0) { canvasStream.addTrack(audioTracks[0]); }
             }
 
+            // High bitrate options (8 Mbps)
+            const options = { videoBitsPerSecond: 8000000 };
+
             try {
-                mediaRecorder = new MediaRecorder(canvasStream);
+                mediaRecorder = new MediaRecorder(canvasStream, options);
             } catch (e) {
-                alert("Recording is not supported in this browser.");
-                return;
+                mediaRecorder = new MediaRecorder(canvasStream);
             }
 
             mediaRecorder.ondataavailable = (e) => {
-                if (e.data && e.data.size > 0) {
-                    recordedChunks.push(e.data);
-                }
+                if (e.data && e.data.size > 0) { recordedChunks.push(e.data); }
             };
 
             mediaRecorder.onstop = () => {
-                if (recordedChunks.length === 0) {
-                    statusText.textContent = "Error: Video buffer empty. Try playing preview again.";
-                    return;
-                }
-                
-                const blob = new Blob(recordedChunks, { type: mediaRecorder.mimeType || 'video/webm' });
-                const url = URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `ziko-canvas-${Date.now()}.webm`;
-                document.body.appendChild(a);
-                a.click();
-                
-                setTimeout(() => {
-                    document.body.removeChild(a);
-                    window.URL.revokeObjectURL(url);
-                }, 300);
-
-                statusText.textContent = `File saved! Size: ${(blob.size / (1024 * 1024)).toFixed(2)} MB`;
-                recordBtn.textContent = "Export 9:16 Video (.webm)";
+                recordedBlob = new Blob(recordedChunks, { type: mediaRecorder.mimeType || 'video/webm' });
+                exportBtn.disabled = false;
+                statusText.textContent = `Recording completed! Size: ${(recordedBlob.size / (1024 * 1024)).toFixed(2)} MB. Click Export to save.`;
+                startRecBtn.textContent = "Record 🔴";
                 isRecording = false;
             };
 
-            // Start recording immediately without splitting chunks
+            // Start Audio and Recording together
+            const startSec = parseFloat(startTimeInput.value) || 0;
+            audioElement.currentTime = startSec;
+            audioElement.play();
+            isPlaying = true;
+
             mediaRecorder.start();
             isRecording = true;
-            statusText.textContent = "🔴 Recording in progress... Click 'Stop & Save Video' when done!";
-            recordBtn.textContent = "Stop & Save Video";
+            visualize();
+
+            statusText.textContent = "🔴 Recording 1080p HD Canvas... Will auto-stop at End Time.";
+            startRecBtn.textContent = "Stop ⏹";
         });
 
         function stopRecording() {
             if (mediaRecorder && mediaRecorder.state !== 'inactive') {
                 mediaRecorder.stop();
             }
+            if (audioElement) audioElement.pause();
+            isPlaying = false;
+            playBtn.textContent = "Preview ▶";
         }
+
+        exportBtn.addEventListener('click', () => {
+            if (!recordedBlob) return;
+            const url = URL.createObjectURL(recordedBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `ziko-canvas-1080p-${Date.now()}.webm`;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(() => {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 300);
+        });
 
         resetBtn.addEventListener('click', () => {
             if (audioElement) { audioElement.pause(); }
@@ -541,6 +628,7 @@
             isRecording = false;
             defaultImgLoaded = false;
             rotateArtwork = false;
+            recordedBlob = null;
             cancelAnimationFrame(animationId);
 
             audioFile.value = '';
@@ -552,14 +640,16 @@
             color1Input.value = '#3b82f6';
             color2Input.value = '#8b5cf6';
             color3Input.value = '#ec4899';
+            color4Input.value = '#10b981';
 
             rotateIndicator.classList.remove('bg-emerald-400');
             rotateIndicator.classList.add('bg-gray-600');
-            rotateText.textContent = 'Artwork Rotation: OFF';
+            rotateText.textContent = 'Rotate: OFF';
 
             playBtn.disabled = true;
-            recordBtn.disabled = true;
-            playBtn.textContent = "Play & Preview";
+            startRecBtn.disabled = true;
+            exportBtn.disabled = true;
+            playBtn.textContent = "Preview ▶";
             statusText.textContent = "Configuration reset completed.";
 
             drawPlaceholderArt();
