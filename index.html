@@ -67,18 +67,34 @@
                     </div>
                 </div>
 
-                <!-- Audio Duration / Range Selector -->
-                <div>
-                    <label class="block text-xs font-medium text-gray-300 mb-1.5">3. Export Duration Range (Seconds)</label>
-                    <div class="grid grid-cols-2 gap-3">
+                <!-- Duration & Trimming Mode -->
+                <div class="bg-gray-950 p-3 border border-gray-800 rounded-xl space-y-2">
+                    <div class="flex items-center justify-between">
+                        <label class="text-xs font-medium text-gray-300 cursor-pointer flex items-center space-x-2">
+                            <input type="checkbox" id="enableTrim" class="w-4 h-4 rounded bg-gray-900 border-gray-700 text-blue-600 focus:ring-0 cursor-pointer">
+                            <span>Enable Custom Duration / Trimming</span>
+                        </label>
+                    </div>
+                    <div id="trimInputsContainer" class="grid grid-cols-2 gap-3 opacity-40 pointer-events-none transition-opacity">
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">Start Time (sec)</label>
-                            <input type="number" id="startTime" value="0" min="0" step="1" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500"/>
+                            <input type="number" id="startTime" value="0" min="0" step="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500"/>
                         </div>
                         <div>
                             <label class="block text-[10px] text-gray-400 mb-0.5">End Time (sec)</label>
-                            <input type="number" id="endTime" value="15" min="1" step="1" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500"/>
+                            <input type="number" id="endTime" value="15" min="1" step="1" class="w-full bg-gray-900 border border-gray-800 rounded-xl px-3 py-1.5 text-xs text-white focus:outline-none focus:border-blue-500"/>
                         </div>
+                    </div>
+                </div>
+
+                <!-- One-Click Studio Preset Themes -->
+                <div>
+                    <label class="block text-xs font-medium text-gray-400 mb-1.5">Studio Preset Themes</label>
+                    <div class="grid grid-cols-4 gap-1.5">
+                        <button type="button" onclick="applyPreset('trance')" class="py-1.5 px-1 bg-gray-950 hover:bg-gray-800 border border-gray-800 text-[10px] rounded-lg text-blue-400 font-medium">Deep Trance</button>
+                        <button type="button" onclick="applyPreset('cinematic')" class="py-1.5 px-1 bg-gray-950 hover:bg-gray-800 border border-gray-800 text-[10px] rounded-lg text-indigo-400 font-medium">Cinematic</button>
+                        <button type="button" onclick="applyPreset('ambient')" class="py-1.5 px-1 bg-gray-950 hover:bg-gray-800 border border-gray-800 text-[10px] rounded-lg text-emerald-400 font-medium">Ambient</button>
+                        <button type="button" onclick="applyPreset('cyber')" class="py-1.5 px-1 bg-gray-950 hover:bg-gray-800 border border-gray-800 text-[10px] rounded-lg text-pink-400 font-medium">Cyber Neon</button>
                     </div>
                 </div>
 
@@ -104,7 +120,13 @@
                     </select>
                 </div>
 
-                <!-- Enhanced 4-Color Section -->
+                <!-- Timed Lyrics / Subtitles Input -->
+                <div>
+                    <label class="block text-xs font-medium text-gray-400 mb-1">Timed Lyrics / Subtitles (Format: [Seconds] Lyric)</label>
+                    <textarea id="lyricsInput" rows="2" placeholder="[0] Intro Beat Drop&#10;[5] Midnight echoes in the dark&#10;[12] We go higher" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 resize-none"></textarea>
+                </div>
+
+                <!-- 4-Color Section -->
                 <div>
                     <label class="block text-xs font-medium text-gray-400 mb-1.5">Color Palette Mode</label>
                     <div class="grid grid-cols-3 gap-2 mb-2" id="paletteGroup">
@@ -113,22 +135,21 @@
                         <button type="button" id="shuffleBtn" class="py-1.5 text-[11px] font-medium rounded-lg border border-gray-800 bg-gray-950 text-gray-400 hover:border-gray-700">Shuffle 🎲</button>
                     </div>
 
-                    <!-- Sleek 4-Color Input Boxes -->
                     <div class="grid grid-cols-4 gap-2 bg-gray-950 p-2.5 border border-gray-800 rounded-xl">
                         <div class="color-box flex flex-col items-center p-1.5 bg-gray-900/80 rounded-lg border border-gray-800">
-                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">Color 1</label>
+                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">C1</label>
                             <input type="color" id="color1" value="#3b82f6" class="w-7 h-7 rounded cursor-pointer bg-transparent border-0"/>
                         </div>
                         <div class="color-box flex flex-col items-center p-1.5 bg-gray-900/80 rounded-lg border border-gray-800">
-                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">Color 2</label>
+                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">C2</label>
                             <input type="color" id="color2" value="#8b5cf6" class="w-7 h-7 rounded cursor-pointer bg-transparent border-0"/>
                         </div>
                         <div class="color-box flex flex-col items-center p-1.5 bg-gray-900/80 rounded-lg border border-gray-800">
-                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">Color 3</label>
+                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">C3</label>
                             <input type="color" id="color3" value="#ec4899" class="w-7 h-7 rounded cursor-pointer bg-transparent border-0"/>
                         </div>
                         <div class="color-box flex flex-col items-center p-1.5 bg-gray-900/80 rounded-lg border border-gray-800">
-                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">Color 4</label>
+                            <label class="text-[9px] text-gray-400 mb-1 font-semibold">C4</label>
                             <input type="color" id="color4" value="#10b981" class="w-7 h-7 rounded cursor-pointer bg-transparent border-0"/>
                         </div>
                     </div>
@@ -149,7 +170,6 @@
                     </button>
                 </div>
 
-                <!-- Prominent Reset Button at the Bottom -->
                 <button id="resetBtn" class="w-full py-2 bg-gray-950 hover:bg-red-950/40 border border-gray-800 hover:border-red-800/50 text-gray-400 hover:text-red-400 text-xs font-medium rounded-xl transition">
                     Clear Inputs & Reset Config
                 </button>
@@ -157,13 +177,31 @@
             </div>
         </div>
 
-        <!-- Preview Column (1080p Internal Canvas Rendered in 9:16 Frame) -->
-        <div class="lg:col-span-7 flex flex-col items-center justify-center bg-gray-900/40 border border-gray-800 rounded-2xl p-4 md:p-6 relative overflow-hidden">
+        <!-- Preview Column & Instagram Caption Generator -->
+        <div class="lg:col-span-7 flex flex-col items-center justify-center bg-gray-900/40 border border-gray-800 rounded-2xl p-4 md:p-6 relative">
+            
+            <!-- Seek Bar / Countdown Progress Bar -->
+            <div class="w-full max-w-[300px] mb-3 flex items-center justify-between text-xs text-gray-400 font-mono">
+                <span id="currentTimeDisplay">00:00</span>
+                <div class="flex-1 mx-3 bg-gray-950 h-2 rounded-full overflow-hidden border border-gray-800">
+                    <div id="progressBar" class="bg-blue-500 h-full w-0 transition-all"></div>
+                </div>
+                <span id="totalTimeDisplay">00:00</span>
+            </div>
+
             <div class="relative w-[300px] h-[533px] bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800 flex flex-col items-center justify-center">
-                <!-- True 1080x1920 Full HD Canvas Buffer -->
                 <canvas id="canvas" width="1080" height="1920" class="w-full h-full object-cover"></canvas>
             </div>
             <p class="text-xs text-gray-400 mt-3 text-center">Full 1080×1920 HD 60FPS Video Canvas • Optimized for Social Media & Streaming</p>
+
+            <!-- Instagram Reels Caption & Hashtag Generator Widget -->
+            <div class="w-full max-w-md mt-6 bg-gray-950 border border-gray-800 p-4 rounded-xl">
+                <div class="flex items-center justify-between mb-2">
+                    <h5 class="text-xs font-semibold text-white">Instagram Reels Viral Caption & Hashtags</h5>
+                    <button onclick="copyCaption()" class="text-[10px] px-2.5 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition font-medium">Copy Caption</button>
+                </div>
+                <textarea id="captionBox" readonly rows="3" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-2 text-[11px] text-gray-300 resize-none focus:outline-none">Just dropped a brand new visual for "Midnight Echoes" by Ziko Mazziko! 🎵🔥 Built instantly with Ziko Mazziko CANVAS Studio. #ZikoMazziko #SpotifyCanvas #InstagramReels #ElectronicMusic #ProducerLife #IZVerseStudio</textarea>
+            </div>
         </div>
     </main>
 
@@ -230,8 +268,19 @@
         const ctx = canvas.getContext('2d');
         const visualMode = document.getElementById('visualMode');
 
+        const enableTrimCheckbox = document.getElementById('enableTrim');
+        const trimInputsContainer = document.getElementById('trimInputsContainer');
         const startTimeInput = document.getElementById('startTime');
         const endTimeInput = document.getElementById('endTime');
+
+        const trackTitleInput = document.getElementById('trackTitle');
+        const artistNameInput = document.getElementById('artistName');
+        const lyricsInput = document.getElementById('lyricsInput');
+        const captionBox = document.getElementById('captionBox');
+
+        const currentTimeDisplay = document.getElementById('currentTimeDisplay');
+        const totalTimeDisplay = document.getElementById('totalTimeDisplay');
+        const progressBar = document.getElementById('progressBar');
 
         const color1Input = document.getElementById('color1');
         const color2Input = document.getElementById('color2');
@@ -263,6 +312,46 @@
             speedY: Math.random() * 2.5 + 1,
             alpha: Math.random() * 0.7 + 0.3
         }));
+
+        // Enable / Disable Trimming Inputs
+        enableTrimCheckbox.addEventListener('change', () => {
+            if (enableTrimCheckbox.checked) {
+                trimInputsContainer.classList.remove('opacity-40', 'pointer-events-none');
+            } else {
+                trimInputsContainer.classList.add('opacity-40', 'pointer-events-none');
+            }
+        });
+
+        // Studio Presets Loader
+        window.applyPreset = function(type) {
+            if (type === 'trance') {
+                visualMode.value = 'bars';
+                color1Input.value = '#3b82f6'; color2Input.value = '#06b6d4'; color3Input.value = '#6366f1'; color4Input.value = '#a855f7';
+            } else if (type === 'cinematic') {
+                visualMode.value = 'bassAura';
+                color1Input.value = '#eab308'; color2Input.value = '#f97316'; color3Input.value = '#dc2626'; color4Input.value = '#7f1d1d';
+            } else if (type === 'ambient') {
+                visualMode.value = 'particles';
+                color1Input.value = '#10b981'; color2Input.value = '#14b8a6'; color3Input.value = '#06b6d4'; color4Input.value = '#3b82f6';
+            } else if (type === 'cyber') {
+                visualMode.value = 'bars';
+                color1Input.value = '#ec4899'; color2Input.value = '#f43f5e'; color3Input.value = '#d946ef'; color4Input.value = '#8b5cf6';
+            }
+            selectedPalette = 'custom';
+            statusText.textContent = `Applied '${type}' Studio Preset!`;
+        }
+
+        function updateCaptionBox() {
+            captionBox.value = `Just dropped a brand new visual for "${trackTitleInput.value}" by ${artistNameInput.value}! 🎵🔥 Built instantly with Ziko Mazziko CANVAS Studio. #ZikoMazziko #SpotifyCanvas #InstagramReels #ElectronicMusic #ProducerLife #IZVerseStudio`;
+        }
+        trackTitleInput.addEventListener('input', updateCaptionBox);
+        artistNameInput.addEventListener('input', updateCaptionBox);
+
+        window.copyCaption = function() {
+            captionBox.select();
+            navigator.clipboard.writeText(captionBox.value);
+            statusText.textContent = "Caption copied to clipboard!";
+        }
 
         paletteBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -370,10 +459,17 @@
                     endTimeInput.value = Math.floor(audioElement.duration);
                     playBtn.disabled = false;
                     startRecBtn.disabled = false;
+                    totalTimeDisplay.textContent = formatTime(audioElement.duration);
                     statusText.textContent = `Audio loaded (${Math.floor(audioElement.duration)}s total)`;
                 };
             }
         });
+
+        function formatTime(secs) {
+            const m = Math.floor(secs / 60);
+            const s = Math.floor(secs % 60);
+            return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
 
         function initAudioContext() {
             if (audioCtx) return;
@@ -394,7 +490,7 @@
             if (audioCtx.state === 'suspended') { await audioCtx.resume(); }
 
             if (!isPlaying) {
-                const startSec = parseFloat(startTimeInput.value) || 0;
+                const startSec = enableTrimCheckbox.checked ? (parseFloat(startTimeInput.value) || 0) : 0;
                 audioElement.currentTime = startSec;
                 audioElement.play();
                 isPlaying = true;
@@ -424,6 +520,18 @@
             return c4;
         }
 
+        function parseLyrics() {
+            const lines = lyricsInput.value.split('\n');
+            let parsed = [];
+            lines.forEach(line => {
+                const match = line.match(/\[(\d+)\]\s*(.+)/);
+                if (match) {
+                    parsed.push({ time: parseInt(match[1]), text: match[2].trim() });
+                }
+            });
+            return parsed;
+        }
+
         function visualize() {
             const bufferLength = analyser.frequencyBinCount;
             const dataArray = new Uint8Array(bufferLength);
@@ -431,9 +539,17 @@
             const H = canvas.height; // 1920
 
             function renderFrame() {
-                // Auto-stop at duration limit
-                const endSec = parseFloat(endTimeInput.value) || audioElement.duration;
-                if (audioElement.currentTime >= endSec) {
+                const currTime = audioElement.currentTime;
+                const totalDur = enableTrimCheckbox.checked ? (parseFloat(endTimeInput.value) || audioElement.duration) : audioElement.duration;
+                const startLimit = enableTrimCheckbox.checked ? (parseFloat(startTimeInput.value) || 0) : 0;
+
+                // Update Seek Bar / Progress
+                currentTimeDisplay.textContent = formatTime(currTime);
+                const progressPct = Math.min(100, Math.max(0, ((currTime - startLimit) / (totalDur - startLimit)) * 100));
+                progressBar.style.width = `${progressPct}%`;
+
+                // Auto-stop condition
+                if (currTime >= totalDur) {
                     audioElement.pause();
                     isPlaying = false;
                     playBtn.textContent = "Preview ▶";
@@ -530,13 +646,25 @@
 
                 ctx.textAlign = 'center';
                 
+                // Render Timed Lyrics if active
+                const lyricsList = parseLyrics();
+                let activeLyric = "";
+                for (let l of lyricsList) {
+                    if (currTime >= l.time) activeLyric = l.text;
+                }
+                if (activeLyric) {
+                    ctx.fillStyle = '#38bdf8';
+                    ctx.font = 'bold 38px system-ui';
+                    ctx.fillText(activeLyric, centerX, centerY - 280);
+                }
+
                 ctx.fillStyle = '#ffffff';
                 ctx.font = 'bold 52px system-ui';
-                ctx.fillText(document.getElementById('trackTitle').value, centerX, centerY + 360);
+                ctx.fillText(trackTitleInput.value, centerX, centerY + 360);
 
                 ctx.fillStyle = '#9ca3af';
                 ctx.font = '36px system-ui';
-                ctx.fillText(document.getElementById('artistName').value, centerX, centerY + 420);
+                ctx.fillText(artistNameInput.value, centerX, centerY + 420);
 
                 ctx.fillStyle = '#3b82f6';
                 ctx.font = 'bold 28px system-ui';
@@ -545,7 +673,6 @@
             renderFrame();
         }
 
-        // HIGH-BITRATE 1080p RECORDING ENGINE
         startRecBtn.addEventListener('click', async () => {
             initAudioContext();
             if (audioCtx.state === 'suspended') { await audioCtx.resume(); }
@@ -556,17 +683,13 @@
             }
 
             recordedChunks = [];
-            
-            // 60 FPS Capture Stream from 1080p Canvas
             const canvasStream = canvas.captureStream(60); 
             if (mediaStreamDestination && mediaStreamDestination.stream) {
                 const audioTracks = mediaStreamDestination.stream.getAudioTracks();
                 if (audioTracks.length > 0) { canvasStream.addTrack(audioTracks[0]); }
             }
 
-            // High bitrate options (8 Mbps)
             const options = { videoBitsPerSecond: 8000000 };
-
             try {
                 mediaRecorder = new MediaRecorder(canvasStream, options);
             } catch (e) {
@@ -585,8 +708,7 @@
                 isRecording = false;
             };
 
-            // Start Audio and Recording together
-            const startSec = parseFloat(startTimeInput.value) || 0;
+            const startSec = enableTrimCheckbox.checked ? (parseFloat(startTimeInput.value) || 0) : 0;
             audioElement.currentTime = startSec;
             audioElement.play();
             isPlaying = true;
@@ -595,7 +717,7 @@
             isRecording = true;
             visualize();
 
-            statusText.textContent = "🔴 Recording 1080p HD Canvas... Will auto-stop at End Time.";
+            statusText.textContent = "🔴 Recording 1080p HD Canvas... Auto-stops at end time.";
             startRecBtn.textContent = "Stop ⏹";
         });
 
@@ -633,9 +755,12 @@
 
             audioFile.value = '';
             imageFile.value = '';
-            document.getElementById('trackTitle').value = 'Midnight Echoes';
-            document.getElementById('artistName').value = 'Ziko Mazziko';
+            trackTitleInput.value = 'Midnight Echoes';
+            artistNameInput.value = 'Ziko Mazziko';
             visualMode.value = 'bars';
+            lyricsInput.value = '';
+            enableTrimCheckbox.checked = false;
+            trimInputsContainer.classList.add('opacity-40', 'pointer-events-none');
             
             color1Input.value = '#3b82f6';
             color2Input.value = '#8b5cf6';
@@ -650,6 +775,9 @@
             startRecBtn.disabled = true;
             exportBtn.disabled = true;
             playBtn.textContent = "Preview ▶";
+            progressBar.style.width = '0%';
+            currentTimeDisplay.textContent = '00:00';
+            totalTimeDisplay.textContent = '00:00';
             statusText.textContent = "Configuration reset completed.";
 
             drawPlaceholderArt();
