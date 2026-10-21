@@ -177,6 +177,7 @@
         let audioCtx, audioElement, audioSource, analyser, mediaStreamDestination, mediaRecorder;
         let recordedChunks = [];
         let isPlaying = false;
+        let isRecording = false;
         let coverImg = new Image();
         let defaultImgLoaded = false;
         let animationId;
@@ -194,7 +195,6 @@
             alpha: Math.random() * 0.7 + 0.3
         }));
 
-        // Palette Button Selection
         paletteBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 paletteBtns.forEach(b => {
@@ -207,7 +207,6 @@
             });
         });
 
-        // Random Shuffle Color Button
         shuffleBtn.addEventListener('click', () => {
             const randomColor = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
             color1Input.value = randomColor();
@@ -222,7 +221,6 @@
             statusText.textContent = "Shuffled new custom colors!";
         });
 
-        // Rotation Toggle Button
         rotateToggleBtn.addEventListener('click', () => {
             rotateArtwork = !rotateArtwork;
             if (rotateArtwork) {
@@ -250,7 +248,6 @@
         }
         drawPlaceholderArt();
 
-        // Extract dominant color from uploaded artwork
         function extractArtworkColor(img) {
             try {
                 const offCanvas = document.createElement('canvas');
@@ -361,17 +358,14 @@
                 animationId = requestAnimationFrame(renderFrame);
                 analyser.getByteFrequencyData(dataArray);
 
-                // Calculate Bass Energy for Beat Pulsing
                 let bassSum = 0;
                 for (let i = 0; i < 10; i++) { bassSum += dataArray[i]; }
                 const bassAvg = bassSum / 10;
                 const beatScale = 1 + (bassAvg / 255) * 0.12;
 
-                // Background
                 ctx.fillStyle = '#090d16';
                 ctx.fillRect(0, 0, W, H);
 
-                // Blurred Background Artwork
                 if (defaultImgLoaded) {
                     ctx.save();
                     ctx.filter = 'blur(25px) brightness(0.35)';
@@ -383,9 +377,7 @@
                 const centerX = W / 2;
                 const centerY = H / 2 - 80;
 
-                // VISUALIZERS
                 if (mode === 'bars') {
-                    // Re-aligned Centered Spectrum Bars
                     const numBars = 32;
                     const barWidth = 8;
                     const gap = 6;
@@ -401,7 +393,6 @@
                         ctx.fillRect(x, centerY - (barHeight / 2), barWidth, barHeight);
                     }
                 } else if (mode === 'particles') {
-                    // Floating Audio Particles
                     particles.forEach((p, idx) => {
                         p.y -= p.speedY * (1 + bassAvg / 100);
                         if (p.y < 0) p.y = H;
@@ -413,7 +404,6 @@
                         ctx.globalAlpha = 1.0;
                     });
                 } else if (mode === 'bassAura') {
-                    // Bass Aura Backlight
                     ctx.beginPath();
                     ctx.arc(centerX, centerY, (120 + (bassAvg * 0.4)) * beatScale, 0, Math.PI * 2);
                     ctx.fillStyle = getColor(0, 1);
@@ -422,7 +412,6 @@
                     ctx.globalAlpha = 1.0;
                 }
 
-                // CENTER ARTWORK DISC (Pulsing & Optional Rotation)
                 if (rotateArtwork) { rotationAngle += 0.008; }
 
                 ctx.save();
@@ -430,7 +419,6 @@
                 ctx.scale(beatScale, beatScale);
                 if (rotateArtwork) { ctx.rotate(rotationAngle); }
 
-                // Circle Disc Clip
                 ctx.beginPath();
                 ctx.arc(0, 0, 110, 0, Math.PI * 2);
                 ctx.closePath();
@@ -444,7 +432,6 @@
                 }
                 ctx.restore();
 
-                // Outer Disc Ring Border
                 ctx.save();
                 ctx.translate(centerX, centerY);
                 ctx.scale(beatScale, beatScale);
@@ -455,20 +442,16 @@
                 ctx.stroke();
                 ctx.restore();
 
-                // TEXT METADATA OVERLAYS
                 ctx.textAlign = 'center';
                 
-                // Track Title
                 ctx.fillStyle = '#ffffff';
                 ctx.font = 'bold 26px system-ui';
                 ctx.fillText(document.getElementById('trackTitle').value, centerX, centerY + 180);
 
-                // Artist Name
                 ctx.fillStyle = '#9ca3af';
                 ctx.font = '18px system-ui';
                 ctx.fillText(document.getElementById('artistName').value, centerX, centerY + 210);
 
-                // Dual Watermark Footer
                 ctx.fillStyle = '#3b82f6';
                 ctx.font = 'bold 14px system-ui';
                 ctx.fillText('Visualized via @ziko.mazziko & @is.zaky.verse', centerX, H - 40);
@@ -476,40 +459,57 @@
             renderFrame();
         }
 
-        // FIXED Video Exporter using standard canvas capture & WebM stream
+        // FIXED CONTINUOUS VIDEO RECORDING ENGINE
         recordBtn.addEventListener('click', async () => {
             if (!isPlaying) {
                 alert("Please click 'Play & Preview' first before exporting.");
                 return;
             }
 
-            recordedChunks = [];
-            const canvasStream = canvas.captureStream(30);
-            const audioTracks = mediaStreamDestination.stream.getAudioTracks();
-            if (audioTracks.length > 0) {
-                canvasStream.addTrack(audioTracks[0]);
+            if (isRecording) {
+                stopRecording();
+                return;
             }
 
-            // Select reliable video codec
-            let options = { mimeType: 'video/webm;codecs=vp8,opus' };
-            if (!MediaRecorder.isTypeSupported(options.mimeType)) {
-                options = { mimeType: 'video/webm' };
+            recordedChunks = [];
+            
+            // Combine Canvas Video Track and WebAudio Audio Track into a Single Combined Stream
+            const canvasStream = canvas.captureStream(30); 
+            const combinedStream = new MediaStream();
+            
+            canvasStream.getVideoTracks().forEach(track => combinedStream.addTrack(track));
+            if (mediaStreamDestination && mediaStreamDestination.stream) {
+                mediaStreamDestination.stream.getAudioTracks().forEach(track => combinedStream.addTrack(track));
+            }
+
+            let mimeType = '';
+            if (MediaRecorder.isTypeSupported('video/webm;codecs=vp8,opus')) {
+                mimeType = 'video/webm;codecs=vp8,opus';
+            } else if (MediaRecorder.isTypeSupported('video/webm')) {
+                mimeType = 'video/webm';
+            } else if (MediaRecorder.isTypeSupported('video/mp4')) {
+                mimeType = 'video/mp4';
             }
 
             try {
-                mediaRecorder = new MediaRecorder(canvasStream, options);
+                mediaRecorder = mimeType ? new MediaRecorder(combinedStream, { mimeType }) : new MediaRecorder(combinedStream);
             } catch (e) {
-                mediaRecorder = new MediaRecorder(canvasStream);
+                mediaRecorder = new MediaRecorder(combinedStream);
             }
 
-            mediaRecorder.ondataavailable = (e) => {
-                if (e.data && e.data.size > 0) {
-                    recordedChunks.push(e.data);
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data && event.data.size > 0) {
+                    recordedChunks.push(event.data);
                 }
             };
 
             mediaRecorder.onstop = () => {
-                const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                if (recordedChunks.length === 0) {
+                    statusText.textContent = "Error: Recording buffer was empty.";
+                    return;
+                }
+                
+                const blob = new Blob(recordedChunks, { type: mediaRecorder.mimeType || 'video/webm' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.style.display = 'none';
@@ -517,31 +517,34 @@
                 a.download = `ziko-canvas-${Date.now()}.webm`;
                 document.body.appendChild(a);
                 a.click();
+                
                 setTimeout(() => {
                     document.body.removeChild(a);
                     window.URL.revokeObjectURL(url);
-                }, 100);
-                statusText.textContent = "Video exported successfully!";
+                }, 200);
+
+                statusText.textContent = `Video saved successfully! (${(blob.size / 1024 / 1024).toFixed(2)} MB)`;
+                recordBtn.textContent = "Export 9:16 Video (.webm)";
+                isRecording = false;
             };
 
-            mediaRecorder.start(1000); // Record in 1s slices for stability
-            statusText.textContent = "Recording video... Click 'Stop & Save Video' when finished.";
+            // Request timeslice data every 500ms so buffer never drops chunks
+            mediaRecorder.start(500);
+            isRecording = true;
+            statusText.textContent = "🔴 Recording canvas in real-time... Click 'Stop & Save' when done.";
             recordBtn.textContent = "Stop & Save Video";
-            recordBtn.onclick = stopRecording;
         });
 
         function stopRecording() {
             if (mediaRecorder && mediaRecorder.state !== 'inactive') {
                 mediaRecorder.stop();
             }
-            recordBtn.textContent = "Export 9:16 Video (.webm)";
-            recordBtn.onclick = null;
         }
 
-        // Reset Configuration
         resetBtn.addEventListener('click', () => {
             if (audioElement) { audioElement.pause(); }
             isPlaying = false;
+            isRecording = false;
             defaultImgLoaded = false;
             rotateArtwork = false;
             cancelAnimationFrame(animationId);
