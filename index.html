@@ -4,338 +4,294 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ziko Mazziko CANVAS Studio</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { 
-            background-color: #0b0f19; 
-            color: #f3f4f6; 
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-        }
-        .glow-box { 
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.12); 
-        }
-        .glow-text {
-            text-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
-        }
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #0b0f19; }
-        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 9999px; }
-        ::-webkit-scrollbar-thumb:hover { background: #374151; }
+        body { background-color: #0b0f19; color: #f3f4f6; font-family: system-ui, -apple-system, sans-serif; }
+        .glow-box { box-shadow: 0 0 30px rgba(59, 130, 246, 0.12); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+<body class="min-h-screen flex flex-col justify-between">
 
-    <!-- Header Bar -->
-    <header class="border-b border-gray-800 bg-gray-900/70 backdrop-blur-md py-4 px-4 sm:px-8 sticky top-0 z-50 flex flex-col sm:flex-row justify-between items-center gap-3">
+    <!-- Header -->
+    <header class="border-b border-gray-800 bg-gray-900/60 backdrop-blur py-4 px-6 sticky top-0 z-50 flex flex-wrap justify-between items-center gap-4">
         <div class="flex items-center space-x-3">
-            <div class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-pulse shadow-lg shadow-blue-500/50"></div>
-            <h1 class="font-bold tracking-wider text-xl text-white">
-                Ziko Mazziko <span class="text-blue-500 glow-text">CANVAS Studio</span>
-            </h1>
+            <div class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-pulse"></div>
+            <h1 class="font-bold tracking-wider text-xl text-white">Ziko Mazziko <span class="text-blue-500">CANVAS Studio</span></h1>
         </div>
-        <div class="text-xs font-medium text-gray-300 bg-gray-800/80 px-3.5 py-1.5 rounded-full border border-gray-700/80 flex items-center gap-2">
-            <i class="fa-solid fa-crown text-amber-400 text-xs"></i>
-            <span>By Ziko Mazziko & I. Z. Verse Studio</span>
+        <div class="text-xs font-medium text-gray-300 bg-gray-800/90 border border-gray-700 px-3.5 py-1.5 rounded-full">
+            By Ziko Mazziko & I. Z. Verse Studio
         </div>
     </header>
 
     <!-- Sub-Header Title & Description -->
-    <section class="max-w-6xl mx-auto w-full px-4 pt-6 text-center space-y-2">
-        <h2 class="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-blue-400">
+    <section class="max-w-6xl mx-auto w-full px-6 pt-6 text-center">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-300 mb-2">
             Supporting Independent Artists Content Creation & Growth
         </h2>
-        <p class="text-sm sm:text-base text-gray-400 max-w-3xl mx-auto">
+        <p class="text-sm md:text-base text-gray-400 max-w-2xl mx-auto">
             Generate Free Unlimited Video Canvas for your music, Share it & Go Viral at Ease
         </p>
     </section>
 
-    <!-- Main Workspace -->
-    <main class="max-w-6xl mx-auto w-full p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 my-auto">
+    <!-- Main Content Grid -->
+    <main class="max-w-6xl mx-auto w-full p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto">
         
-        <!-- Controls & Configuration Column -->
-        <div class="lg:col-span-6 bg-gray-900/80 border border-gray-800/90 p-5 sm:p-6 rounded-2xl glow-box flex flex-col justify-between space-y-6">
-            <div class="space-y-5">
-                <div class="flex items-center justify-between border-b border-gray-800 pb-3">
-                    <h3 class="text-lg font-semibold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-sliders text-blue-500 text-sm"></i>
-                        Audio & Visual Configuration
-                    </h3>
-                    <span class="text-[11px] text-gray-500 font-mono">v3.0 EXPORT FIX</span>
-                </div>
+        <!-- Controls Column -->
+        <div class="lg:col-span-5 bg-gray-900/80 border border-gray-800 p-6 rounded-2xl glow-box flex flex-col justify-between space-y-5">
+            <div class="space-y-4">
+                <h3 class="text-lg font-semibold text-white border-b border-gray-800 pb-2.5">
+                    Audio & Visual Configuration
+                </h3>
                 
-                <!-- 1. Upload Audio -->
+                <!-- Audio Upload -->
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1.5 uppercase tracking-wider">Upload Track Audio (.mp3 / .wav)</label>
-                    <input type="file" id="audioFile" accept="audio/*" class="w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-2 transition focus:outline-none focus:border-blue-500"/>
-                    <p id="audioNameDisplay" class="text-[11px] text-gray-500 mt-1 truncate"></p>
+                    <label class="block text-xs font-medium text-gray-300 mb-1.5">1. Upload Track Audio (.mp3 / .wav)</label>
+                    <input type="file" id="audioFile" accept="audio/*" class="w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-500 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-1.5"/>
                 </div>
 
-                <!-- 2. Upload Cover Artwork -->
+                <!-- Artwork Upload -->
                 <div>
-                    <label class="block text-xs font-semibold text-gray-300 mb-1.5 uppercase tracking-wider">Upload Cover Artwork</label>
-                    <input type="file" id="imageFile" accept="image/*" class="w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gray-800 file:text-gray-200 hover:file:bg-gray-700 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-2 transition focus:outline-none focus:border-blue-500"/>
-                    <p id="imageNameDisplay" class="text-[11px] text-gray-500 mt-1 truncate"></p>
+                    <label class="block text-xs font-medium text-gray-300 mb-1.5">2. Upload Cover Artwork</label>
+                    <input type="file" id="imageFile" accept="image/*" class="w-full text-xs text-gray-400 file:mr-3 file:py-2 file:px-3.5 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gray-800 file:text-gray-200 hover:file:bg-gray-700 file:cursor-pointer cursor-pointer bg-gray-950 border border-gray-800 rounded-xl p-1.5"/>
                 </div>
 
                 <!-- Metadata Inputs -->
                 <div class="grid grid-cols-2 gap-3">
                     <div>
                         <label class="block text-xs font-medium text-gray-400 mb-1">Track Title</label>
-                        <input type="text" id="trackTitle" value="Midnight Echoes" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 transition"/>
+                        <input type="text" id="trackTitle" value="Midnight Echoes" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 text-white"/>
                     </div>
                     <div>
                         <label class="block text-xs font-medium text-gray-400 mb-1">Artist Name</label>
-                        <input type="text" id="artistName" value="Ziko Mazziko" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 transition"/>
+                        <input type="text" id="artistName" value="Ziko Mazziko" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 text-white"/>
                     </div>
                 </div>
 
-                <!-- Visualizer Style -->
+                <!-- Visual Mode Selection -->
                 <div>
                     <label class="block text-xs font-medium text-gray-400 mb-1">Visualizer Style</label>
-                    <select id="visualMode" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs text-gray-200 focus:outline-none focus:border-blue-500 transition cursor-pointer">
+                    <select id="visualMode" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 text-white">
                         <option value="bars">Centered Frequency Bars</option>
                         <option value="particles">Floating Audio Particles</option>
                         <option value="bassAura">Bass Aura Glow</option>
                     </select>
                 </div>
 
-                <!-- Color Palette Modes & Custom Pickers -->
-                <div class="space-y-2 pt-1 border-t border-gray-800/60">
-                    <label class="block text-xs font-medium text-gray-400">Color Palette Mode</label>
-                    <div class="grid grid-cols-3 gap-2" id="paletteGroup">
-                        <button type="button" id="btnArtworkColor" data-mode="auto" class="palette-btn py-2 text-[11px] font-medium rounded-xl border border-blue-500 bg-blue-600/20 text-blue-400 transition">Artwork Color</button>
-                        <button type="button" id="btnCleanWhite" data-mode="white" class="palette-btn py-2 text-[11px] font-medium rounded-xl border border-gray-800 bg-gray-950 text-gray-400 hover:border-gray-700 transition">Clean White</button>
-                        <button type="button" id="shuffleBtn" class="py-2 text-[11px] font-medium rounded-xl border border-gray-800 bg-gray-950 text-gray-300 hover:border-gray-700 transition flex items-center justify-center gap-1">
-                            <span>Random Shuffle</span>
-                            <span>🎲</span>
-                        </button>
+                <!-- Color Mode & Custom Pickers -->
+                <div>
+                    <label class="block text-xs font-medium text-gray-400 mb-1.5">Color Palette Mode</label>
+                    <div class="grid grid-cols-3 gap-2 mb-2" id="paletteGroup">
+                        <button type="button" data-palette="auto" class="palette-btn py-1.5 text-[11px] font-medium rounded-lg border border-blue-500 bg-blue-600/20 text-blue-400">Artwork Color</button>
+                        <button type="button" data-palette="white" class="palette-btn py-1.5 text-[11px] font-medium rounded-lg border border-gray-800 bg-gray-950 text-gray-400 hover:border-gray-700">Clean White</button>
+                        <button type="button" id="shuffleBtn" class="py-1.5 text-[11px] font-medium rounded-lg border border-gray-800 bg-gray-950 text-gray-400 hover:border-gray-700">Random Shuffle 🎲</button>
                     </div>
 
-                    <div class="flex items-center justify-between space-x-2 bg-gray-950 p-2.5 border border-gray-800 rounded-xl mt-2">
+                    <div class="flex items-center space-x-3 bg-gray-950 p-2 border border-gray-800 rounded-xl">
                         <div class="flex items-center space-x-1.5">
-                            <label class="text-[11px] text-gray-400 font-medium">Color 1:</label>
-                            <input type="color" id="color1" value="#3b82f6" class="w-7 h-7 rounded-lg bg-transparent border border-gray-800 p-0.5 cursor-pointer"/>
+                            <label class="text-[10px] text-gray-400">Color 1:</label>
+                            <input type="color" id="color1" value="#3b82f6" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0"/>
                         </div>
                         <div class="flex items-center space-x-1.5">
-                            <label class="text-[11px] text-gray-400 font-medium">Color 2:</label>
-                            <input type="color" id="color2" value="#8b5cf6" class="w-7 h-7 rounded-lg bg-transparent border border-gray-800 p-0.5 cursor-pointer"/>
+                            <label class="text-[10px] text-gray-400">Color 2:</label>
+                            <input type="color" id="color2" value="#8b5cf6" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0"/>
                         </div>
                         <div class="flex items-center space-x-1.5">
-                            <label class="text-[11px] text-gray-400 font-medium">Color 3:</label>
-                            <input type="color" id="color3" value="#ec4899" class="w-7 h-7 rounded-lg bg-transparent border border-gray-800 p-0.5 cursor-pointer"/>
+                            <label class="text-[10px] text-gray-400">Color 3:</label>
+                            <input type="color" id="color3" value="#ec4899" class="w-6 h-6 rounded cursor-pointer bg-transparent border-0"/>
                         </div>
                     </div>
                 </div>
 
-                <!-- Rotate Artwork Toggle Button -->
+                <!-- Rotate Artwork Button Toggle -->
                 <div>
-                    <button type="button" id="rotateToggleBtn" class="w-full py-2.5 bg-gray-950 hover:bg-gray-800 border border-gray-800 text-xs font-medium rounded-xl text-gray-300 transition flex items-center justify-center space-x-2.5">
-                        <span id="rotateIndicator" class="w-2.5 h-2.5 rounded-full bg-gray-600"></span>
-                        <span id="rotateText">Rotate Artwork: OFF</span>
+                    <button type="button" id="rotateToggleBtn" class="w-full py-2 bg-gray-950 hover:bg-gray-800 border border-gray-800 text-xs font-medium rounded-xl text-gray-300 transition flex items-center justify-center space-x-2">
+                        <span id="rotateIndicator" class="w-2 h-2 rounded-full bg-gray-600"></span>
+                        <span id="rotateText">Artwork Rotation: OFF</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Action Controls -->
-            <div class="space-y-2.5 pt-4 border-t border-gray-800">
-                <button id="playBtn" disabled class="w-full py-3 bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-xs sm:text-sm text-white rounded-xl transition shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-play text-xs"></i>
-                    <span id="playBtnText">Play & Preview</span>
-                </button>
-                <button id="recordBtn" disabled class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed font-semibold text-xs sm:text-sm text-white rounded-xl transition shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-video text-xs"></i>
-                    <span id="recordBtnText">Export 9:16 Video (.webm)</span>
-                </button>
-                <button id="resetBtn" type="button" class="w-full py-2.5 bg-gray-950 hover:bg-red-950/40 hover:text-red-400 text-gray-400 border border-gray-800 rounded-xl text-xs font-medium transition flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-trash-can text-xs"></i>
-                    <span>Clear Inputs & Reset Config</span>
-                </button>
-                <div id="statusText" class="text-xs text-center text-blue-400 min-h-[1.25rem] font-medium pt-1"></div>
+            <!-- Action Controls & Reset -->
+            <div class="space-y-2.5 pt-3 border-t border-gray-800">
+                <button id="playBtn" disabled class="w-full py-2.5 bg-blue-600 hover:bg-blue-500 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-xs rounded-xl transition shadow-lg shadow-blue-600/20 text-white">Play & Preview</button>
+                <button id="recordBtn" disabled class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-xs rounded-xl transition shadow-lg shadow-emerald-600/20 text-white">Export 9:16 Video (.webm)</button>
+                <button id="resetBtn" class="w-full py-2 bg-gray-950 hover:bg-red-950/40 border border-gray-800 hover:border-red-800/50 text-gray-400 hover:text-red-400 text-xs font-medium rounded-xl transition">Clear Inputs & Reset Config</button>
+                <div id="statusText" class="text-[11px] text-center text-blue-400 min-h-[16px]"></div>
             </div>
         </div>
 
-        <!-- Preview Column (9:16 Canvas) -->
-        <div class="lg:col-span-6 flex flex-col items-center justify-center bg-gray-900/40 border border-gray-800/80 rounded-2xl p-4 sm:p-6 relative overflow-hidden">
-            <div class="relative w-[280px] sm:w-[320px] h-[497px] sm:h-[568px] bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800/90 flex flex-col items-center justify-center">
+        <!-- Preview Column (9:16 Vertical Canvas) -->
+        <div class="lg:col-span-7 flex flex-col items-center justify-center bg-gray-900/40 border border-gray-800 rounded-2xl p-4 md:p-6 relative overflow-hidden">
+            <div class="relative w-[300px] h-[533px] bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-800 flex flex-col items-center justify-center">
                 <canvas id="canvas" width="540" height="960" class="w-full h-full object-cover"></canvas>
             </div>
-            <p class="text-xs text-gray-400 mt-3 text-center font-medium">
-                Exact 9:16 aspect ratio optimized for Social Media & Music Streaming Platforms
-            </p>
+            <p class="text-xs text-gray-400 mt-3 text-center">Exact 9:16 aspect ratio optimized for Social Media & Music Streaming Platforms</p>
         </div>
-
     </main>
 
-    <!-- Learn More & Studio External Links Section -->
-    <section class="max-w-6xl mx-auto w-full px-4 py-4">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 bg-gray-900/50 p-4 rounded-2xl border border-gray-800/80">
+    <!-- Learn More & Studio Websites Links -->
+    <section class="max-w-6xl mx-auto w-full px-6 py-6 border-t border-gray-800/80 my-4">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 bg-gray-900/50 p-4 rounded-2xl border border-gray-800">
             <div>
-                <h4 class="text-sm font-semibold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-compass text-blue-400"></i>
-                    Learn More & Explore Our Ecosystem
-                </h4>
-                <p class="text-xs text-gray-400">Discover sonic identity creation, custom visualizers, and artist branding tools.</p>
+                <h4 class="text-sm font-semibold text-white">Learn More & Explore Our Ecosystem</h4>
+                <p class="text-xs text-gray-400">Discover sonic identity services, AI visual production, and studio tools.</p>
             </div>
-            <div class="flex items-center gap-3">
-                <a href="https://ziko-mazziko.izverse.store" target="_blank" rel="noopener noreferrer" class="text-xs px-3.5 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-blue-400 font-medium border border-gray-700 transition flex items-center gap-1.5">
-                    <i class="fa-solid fa-globe text-xs"></i>
-                    <span>Sonic Store</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            <div class="flex flex-wrap items-center gap-3">
+                <a href="https://ziko-mazziko.izverse.store" target="_blank" rel="noopener noreferrer" class="text-xs px-4 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 text-blue-400 font-medium border border-gray-700 transition">
+                    Sonic Identity Store ↗
                 </a>
-                <a href="https://izverse.store" target="_blank" rel="noopener noreferrer" class="text-xs px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium transition flex items-center gap-1.5 shadow-md shadow-blue-600/30">
-                    <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
-                    <span>AI Studio</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                <a href="https://izverse.store" target="_blank" rel="noopener noreferrer" class="text-xs px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-medium transition">
+                    AI & Visual Studio ↗
                 </a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="mt-4 border-t border-gray-800/80 bg-gray-950/80 py-5 px-4 text-center">
-        <p class="text-xs text-gray-400 flex items-center justify-center gap-2">
-            <i class="fa-solid fa-shield-halved text-emerald-400"></i>
-            <span>Safe & Secured audio visualizer engine • Powered by <strong>I. Z. Verse Studio</strong></span>
-        </p>
+    <footer class="py-4 text-center text-xs text-gray-500 border-t border-gray-800">
+        Safe & Secured audio visualizer engine • Powered by I. Z. Verse Studio
     </footer>
 
-    <!-- Main JavaScript Application Engine -->
+    <!-- Application Engine Script -->
     <script>
-        // DOM Elements
         const audioFile = document.getElementById('audioFile');
         const imageFile = document.getElementById('imageFile');
-        const audioNameDisplay = document.getElementById('audioNameDisplay');
-        const imageNameDisplay = document.getElementById('imageNameDisplay');
-        const trackTitleInput = document.getElementById('trackTitle');
-        const artistNameInput = document.getElementById('artistName');
-        const visualModeSelect = document.getElementById('visualMode');
         const playBtn = document.getElementById('playBtn');
-        const playBtnText = document.getElementById('playBtnText');
         const recordBtn = document.getElementById('recordBtn');
-        const recordBtnText = document.getElementById('recordBtnText');
         const resetBtn = document.getElementById('resetBtn');
         const shuffleBtn = document.getElementById('shuffleBtn');
-        const rotateToggleBtn = document.getElementById('rotateToggleBtn');
-        const rotateIndicator = document.getElementById('rotateIndicator');
-        const rotateText = document.getElementById('rotateText');
         const statusText = document.getElementById('statusText');
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
+        const visualMode = document.getElementById('visualMode');
 
         const color1Input = document.getElementById('color1');
         const color2Input = document.getElementById('color2');
         const color3Input = document.getElementById('color3');
-        const btnArtworkColor = document.getElementById('btnArtworkColor');
-        const btnCleanWhite = document.getElementById('btnCleanWhite');
+        const paletteBtns = document.querySelectorAll('.palette-btn');
 
-        // State Variables
-        let audioCtx = null;
-        let audioElement = null;
-        let audioSourceNode = null;
-        let analyserNode = null;
-        let mediaStreamDest = null;
-        let mediaRecorder = null;
+        const rotateToggleBtn = document.getElementById('rotateToggleBtn');
+        const rotateIndicator = document.getElementById('rotateIndicator');
+        const rotateText = document.getElementById('rotateText');
+
+        let audioCtx, audioElement, audioSource, analyser, mediaStreamDestination, mediaRecorder;
         let recordedChunks = [];
-
         let isPlaying = false;
         let isRecording = false;
         let coverImg = new Image();
-        let isImgLoaded = false;
-        let animationFrameId = null;
+        let defaultImgLoaded = false;
+        let animationId;
         let rotateArtwork = false;
-        let selectedPaletteMode = 'auto'; // 'auto', 'white', 'custom'
+        let selectedPalette = 'auto';
         let rotationAngle = 0;
-        let extractedColorHex = '#3b82f6';
+        let extractedColor = '#3b82f6';
 
-        // Floating particle array initialization
-        let particleArray = Array.from({ length: 45 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
+        let particles = Array.from({ length: 40 }, () => ({
+            x: Math.random() * 540,
+            y: Math.random() * 960,
             radius: Math.random() * 3 + 1,
             speedY: Math.random() * 1.5 + 0.5,
             alpha: Math.random() * 0.7 + 0.3
         }));
 
-        // Draw Default Placeholder Artwork
+        paletteBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                paletteBtns.forEach(b => {
+                    b.classList.remove('border-blue-500', 'bg-blue-600/20', 'text-blue-400');
+                    b.classList.add('border-gray-800', 'bg-gray-950', 'text-gray-400');
+                });
+                btn.classList.remove('border-gray-800', 'bg-gray-950', 'text-gray-400');
+                btn.classList.add('border-blue-500', 'bg-blue-600/20', 'text-blue-400');
+                selectedPalette = btn.getAttribute('data-palette');
+            });
+        });
+
+        shuffleBtn.addEventListener('click', () => {
+            const randomColor = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+            color1Input.value = randomColor();
+            color2Input.value = randomColor();
+            color3Input.value = randomColor();
+            
+            paletteBtns.forEach(b => {
+                b.classList.remove('border-blue-500', 'bg-blue-600/20', 'text-blue-400');
+                b.classList.add('border-gray-800', 'bg-gray-950', 'text-gray-400');
+            });
+            selectedPalette = 'custom';
+            statusText.textContent = "Shuffled new custom colors!";
+        });
+
+        rotateToggleBtn.addEventListener('click', () => {
+            rotateArtwork = !rotateArtwork;
+            if (rotateArtwork) {
+                rotateIndicator.classList.remove('bg-gray-600');
+                rotateIndicator.classList.add('bg-emerald-400');
+                rotateText.textContent = 'Artwork Rotation: ON';
+            } else {
+                rotateIndicator.classList.remove('bg-emerald-400');
+                rotateIndicator.classList.add('bg-gray-600');
+                rotateText.textContent = 'Artwork Rotation: OFF';
+            }
+        });
+
         function drawPlaceholderArt() {
             ctx.fillStyle = '#090d16';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2 - 80;
-
             ctx.fillStyle = '#1f2937';
             ctx.beginPath();
-            ctx.arc(centerX, centerY, 110, 0, Math.PI * 2);
+            ctx.arc(canvas.width / 2, canvas.height / 2 - 80, 110, 0, Math.PI * 2);
             ctx.fill();
-
             ctx.fillStyle = '#4b5563';
             ctx.font = 'bold 16px system-ui';
             ctx.textAlign = 'center';
-            ctx.fillText('NO ARTWORK LOADED', centerX, centerY);
+            ctx.fillText('NO ARTWORK LOADED', canvas.width / 2, canvas.height / 2 - 80);
         }
         drawPlaceholderArt();
 
-        // Extract Dominant Color from Artwork Canvas
-        function extractDominantColor(img) {
+        function extractArtworkColor(img) {
             try {
                 const offCanvas = document.createElement('canvas');
-                offCanvas.width = 40;
-                offCanvas.height = 40;
+                offCanvas.width = 50;
+                offCanvas.height = 50;
                 const offCtx = offCanvas.getContext('2d');
-                offCtx.drawImage(img, 0, 0, 40, 40);
-                const imgData = offCtx.getImageData(5, 5, 30, 30).data;
-                let r = 0, g = 0, b = 0, total = 0;
-
-                for (let i = 0; i < imgData.length; i += 4) {
-                    r += imgData[i];
-                    g += imgData[i + 1];
-                    b += imgData[i + 2];
-                    total++;
+                offCtx.drawImage(img, 0, 0, 50, 50);
+                const data = offCtx.getImageData(10, 10, 30, 30).data;
+                let r = 0, g = 0, b = 0, count = 0;
+                for (let i = 0; i < data.length; i += 4) {
+                    r += data[i];
+                    g += data[i+1];
+                    b += data[i+2];
+                    count++;
                 }
-
-                r = Math.floor(r / total);
-                g = Math.floor(g / total);
-                b = Math.floor(b / total);
-
-                extractedColorHex = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
-                color1Input.value = extractedColorHex;
-            } catch (err) {
-                extractedColorHex = '#3b82f6';
+                r = Math.floor(r / count);
+                g = Math.floor(g / count);
+                b = Math.floor(b / count);
+                extractedColor = `rgb(${r}, ${g}, ${b})`;
+                color1Input.value = "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+            } catch (e) {
+                extractedColor = '#3b82f6';
             }
         }
 
-        // Handle Image Upload
         imageFile.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
-                imageNameDisplay.textContent = `Selected: ${file.name}`;
                 const reader = new FileReader();
                 reader.onload = (event) => {
-                    coverImg = new Image();
-                    coverImg.onload = () => {
-                        isImgLoaded = true;
-                        extractDominantColor(coverImg);
-                        if (!isPlaying) visualizeOnce();
-                    };
                     coverImg.src = event.target.result;
+                    coverImg.onload = () => { 
+                        defaultImgLoaded = true;
+                        extractArtworkColor(coverImg);
+                    };
                 };
                 reader.readAsDataURL(file);
             }
         });
 
-        // Handle Audio Upload
         audioFile.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
-                audioNameDisplay.textContent = `Selected: ${file.name}`;
                 const url = URL.createObjectURL(file);
-                if (audioElement) { 
-                    audioElement.pause(); 
-                }
+                if (audioElement) { audioElement.pause(); }
                 audioElement = new Audio(url);
                 audioElement.crossOrigin = "anonymous";
                 audioElement.loop = true;
@@ -343,76 +299,46 @@
                 audioElement.oncanplaythrough = () => {
                     playBtn.disabled = false;
                     recordBtn.disabled = false;
-                    statusText.textContent = "Audio loaded and ready for playback & export!";
+                    statusText.textContent = "Audio loaded and ready!";
                 };
             }
         });
 
-        // Palette Button Handlers
-        btnArtworkColor.addEventListener('click', () => {
-            selectedPaletteMode = 'auto';
-            updatePaletteUI(btnArtworkColor);
-        });
-
-        btnCleanWhite.addEventListener('click', () => {
-            selectedPaletteMode = 'white';
-            updatePaletteUI(btnCleanWhite);
-        });
-
-        shuffleBtn.addEventListener('click', () => {
-            selectedPaletteMode = 'custom';
-            const randomColor = () => '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
-            color1Input.value = randomColor();
-            color2Input.value = randomColor();
-            color3Input.value = randomColor();
-            updatePaletteUI(null);
-            statusText.textContent = "Color palette randomized!";
-        });
-
-        function updatePaletteUI(activeBtn) {
-            [btnArtworkColor, btnCleanWhite].forEach(b => {
-                b.classList.remove('border-blue-500', 'bg-blue-600/20', 'text-blue-400');
-                b.classList.add('border-gray-800', 'bg-gray-950', 'text-gray-400');
-            });
-            if (activeBtn) {
-                activeBtn.classList.remove('border-gray-800', 'bg-gray-950', 'text-gray-400');
-                activeBtn.classList.add('border-blue-500', 'bg-blue-600/20', 'text-blue-400');
-            }
-        }
-
-        // Rotate Artwork Button Toggle
-        rotateToggleBtn.addEventListener('click', () => {
-            rotateArtwork = !rotateArtwork;
-            if (rotateArtwork) {
-                rotateIndicator.classList.remove('bg-gray-600');
-                rotateIndicator.classList.add('bg-emerald-400');
-                rotateText.textContent = 'Rotate Artwork: ON';
-            } else {
-                rotateIndicator.classList.remove('bg-emerald-400');
-                rotateIndicator.classList.add('bg-gray-600');
-                rotateText.textContent = 'Rotate Artwork: OFF';
-            }
-        });
-
-        // Audio Context Setup
-        function initAudioEngine() {
+        function initAudioContext() {
             if (audioCtx) return;
             audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            analyserNode = audioCtx.createAnalyser();
-            analyserNode.fftSize = 256;
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 256;
 
-            audioSourceNode = audioCtx.createMediaElementSource(audioElement);
-            mediaStreamDest = audioCtx.createMediaStreamDestination();
-
-            audioSourceNode.connect(analyserNode);
-            analyserNode.connect(audioCtx.destination);
-            analyserNode.connect(mediaStreamDest);
+            audioSource = audioCtx.createMediaElementSource(audioElement);
+            mediaStreamDestination = audioCtx.createMediaStreamDestination();
+            
+            // Route to both speaker output and destination recorder stream
+            audioSource.connect(analyser);
+            analyser.connect(audioCtx.destination);
+            analyser.connect(mediaStreamDestination);
         }
 
-        // Color Mode Helper
-        function getPaletteColor(index, total) {
-            if (selectedPaletteMode === 'auto') return extractedColorHex;
-            if (selectedPaletteMode === 'white') return '#ffffff';
+        playBtn.addEventListener('click', async () => {
+            initAudioContext();
+            if (audioCtx.state === 'suspended') { await audioCtx.resume(); }
+
+            if (!isPlaying) {
+                audioElement.play();
+                isPlaying = true;
+                playBtn.textContent = "Pause Preview";
+                visualize();
+            } else {
+                audioElement.pause();
+                isPlaying = false;
+                playBtn.textContent = "Play & Preview";
+                cancelAnimationFrame(animationId);
+            }
+        });
+
+        function getColor(index, total) {
+            if (selectedPalette === 'auto') return extractedColor;
+            if (selectedPalette === 'white') return '#ffffff';
             
             const c1 = color1Input.value;
             const c2 = color2Input.value;
@@ -422,168 +348,118 @@
             return c3;
         }
 
-        // Static Frame Render (for instant preview on change)
-        function visualizeOnce() {
-            if (!isPlaying) visualizeFrameOnly(new Uint8Array(128));
-        }
-
-        // Single Render Frame Logic
-        function visualizeFrameOnly(dataArray) {
+        function visualize() {
+            const bufferLength = analyser.frequencyBinCount;
+            const dataArray = new Uint8Array(bufferLength);
             const W = canvas.width;
             const H = canvas.height;
-            const centerX = W / 2;
-            const centerY = H / 2 - 80;
 
-            let bassSum = 0;
-            for (let i = 0; i < 10; i++) bassSum += (dataArray[i] || 0);
-            const bassAvg = bassSum / 10;
-            const beatScale = 1 + (bassAvg / 255) * 0.12;
+            function renderFrame() {
+                animationId = requestAnimationFrame(renderFrame);
+                analyser.getByteFrequencyData(dataArray);
 
-            // Background Fill
-            ctx.fillStyle = '#090d16';
-            ctx.fillRect(0, 0, W, H);
+                let bassSum = 0;
+                for (let i = 0; i < 10; i++) { bassSum += dataArray[i]; }
+                const bassAvg = bassSum / 10;
+                const beatScale = 1 + (bassAvg / 255) * 0.12;
 
-            // Blurred Cover Artwork Background
-            if (isImgLoaded) {
-                ctx.save();
-                ctx.filter = 'blur(25px) brightness(0.35)';
-                ctx.drawImage(coverImg, 0, 0, W, H);
-                ctx.restore();
-            }
+                ctx.fillStyle = '#090d16';
+                ctx.fillRect(0, 0, W, H);
 
-            const mode = visualModeSelect.value;
-
-            // 1. Centered Frequency Bars
-            if (mode === 'bars') {
-                const numBars = 32;
-                const barWidth = 8;
-                const gap = 6;
-                const totalWidth = numBars * (barWidth + gap);
-                const startX = centerX - (totalWidth / 2);
-
-                for (let i = 0; i < numBars; i++) {
-                    const val = dataArray[i * 2] || 0;
-                    const barHeight = Math.max(6, (val / 255) * 180);
-                    const x = startX + i * (barWidth + gap);
-                    ctx.fillStyle = getPaletteColor(i, numBars);
-                    ctx.fillRect(x, centerY - (barHeight / 2), barWidth, barHeight);
+                if (defaultImgLoaded) {
+                    ctx.save();
+                    ctx.filter = 'blur(25px) brightness(0.35)';
+                    ctx.drawImage(coverImg, 0, 0, W, H);
+                    ctx.restore();
                 }
-            } 
-            // 2. Floating Audio Particles
-            else if (mode === 'particles') {
-                particleArray.forEach((p, idx) => {
-                    if (isPlaying) {
-                        p.y -= p.speedY * (1 + bassAvg / 80);
-                        if (p.y < 0) p.y = H;
+
+                const mode = visualMode.value;
+                const centerX = W / 2;
+                const centerY = H / 2 - 80;
+
+                if (mode === 'bars') {
+                    const numBars = 32;
+                    const barWidth = 8;
+                    const gap = 6;
+                    const totalWidth = numBars * (barWidth + gap);
+                    const startX = centerX - (totalWidth / 2);
+
+                    for (let i = 0; i < numBars; i++) {
+                        const val = dataArray[i * 2] || 0;
+                        const barHeight = (val / 255) * 180;
+                        const x = startX + i * (barWidth + gap);
+                        
+                        ctx.fillStyle = getColor(i, numBars);
+                        ctx.fillRect(x, centerY - (barHeight / 2), barWidth, barHeight);
                     }
+                } else if (mode === 'particles') {
+                    particles.forEach((p, idx) => {
+                        p.y -= p.speedY * (1 + bassAvg / 100);
+                        if (p.y < 0) p.y = H;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius * beatScale, 0, Math.PI * 2);
+                        ctx.fillStyle = getColor(idx, particles.length);
+                        ctx.globalAlpha = p.alpha;
+                        ctx.fill();
+                        ctx.globalAlpha = 1.0;
+                    });
+                } else if (mode === 'bassAura') {
                     ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius * beatScale, 0, Math.PI * 2);
-                    ctx.fillStyle = getPaletteColor(idx, particleArray.length);
-                    ctx.globalAlpha = p.alpha;
+                    ctx.arc(centerX, centerY, (120 + (bassAvg * 0.4)) * beatScale, 0, Math.PI * 2);
+                    ctx.fillStyle = getColor(0, 1);
+                    ctx.globalAlpha = 0.25;
                     ctx.fill();
                     ctx.globalAlpha = 1.0;
-                });
-            } 
-            // 3. Bass Aura Glow
-            else if (mode === 'bassAura') {
+                }
+
+                if (rotateArtwork) { rotationAngle += 0.008; }
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.scale(beatScale, beatScale);
+                if (rotateArtwork) { ctx.rotate(rotationAngle); }
+
                 ctx.beginPath();
-                ctx.arc(centerX, centerY, (120 + (bassAvg * 0.45)) * beatScale, 0, Math.PI * 2);
-                ctx.fillStyle = getPaletteColor(0, 1);
-                ctx.globalAlpha = 0.25;
-                ctx.fill();
-                ctx.globalAlpha = 1.0;
+                ctx.arc(0, 0, 110, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.clip();
+
+                if (defaultImgLoaded) {
+                    ctx.drawImage(coverImg, -110, -110, 220, 220);
+                } else {
+                    ctx.fillStyle = '#1f2937';
+                    ctx.fillRect(-110, -110, 220, 220);
+                }
+                ctx.restore();
+
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                ctx.scale(beatScale, beatScale);
+                ctx.beginPath();
+                ctx.arc(0, 0, 110, 0, Math.PI * 2);
+                ctx.lineWidth = 3;
+                ctx.strokeStyle = getColor(0, 1);
+                ctx.stroke();
+                ctx.restore();
+
+                ctx.textAlign = 'center';
+                
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 26px system-ui';
+                ctx.fillText(document.getElementById('trackTitle').value, centerX, centerY + 180);
+
+                ctx.fillStyle = '#9ca3af';
+                ctx.font = '18px system-ui';
+                ctx.fillText(document.getElementById('artistName').value, centerX, centerY + 210);
+
+                ctx.fillStyle = '#3b82f6';
+                ctx.font = 'bold 14px system-ui';
+                ctx.fillText('Visualized via @ziko.mazziko & @is.zaky.verse', centerX, H - 40);
             }
-
-            // Cover Artwork Rotation
-            if (rotateArtwork && isPlaying) { 
-                rotationAngle += 0.008; 
-            }
-
-            // Draw Central Artwork Circle
-            ctx.save();
-            ctx.translate(centerX, centerY);
-            ctx.scale(beatScale, beatScale);
-            if (rotateArtwork) ctx.rotate(rotationAngle);
-
-            ctx.beginPath();
-            ctx.arc(0, 0, 110, 0, Math.PI * 2);
-            ctx.closePath();
-            ctx.clip();
-
-            if (isImgLoaded) {
-                ctx.drawImage(coverImg, -110, -110, 220, 220);
-            } else {
-                ctx.fillStyle = '#1f2937';
-                ctx.fillRect(-110, -110, 220, 220);
-            }
-            ctx.restore();
-
-            // Border Circle Overlay
-            ctx.save();
-            ctx.translate(centerX, centerY);
-            ctx.scale(beatScale, beatScale);
-            ctx.beginPath();
-            ctx.arc(0, 0, 110, 0, Math.PI * 2);
-            ctx.lineWidth = 3.5;
-            ctx.strokeStyle = getPaletteColor(0, 1);
-            ctx.stroke();
-            ctx.restore();
-
-            // Text Metadata Overlays
-            ctx.textAlign = 'center';
-            
-            // Track Title
-            ctx.fillStyle = '#ffffff';
-            ctx.font = 'bold 26px system-ui';
-            ctx.fillText(trackTitleInput.value || 'Midnight Echoes', centerX, centerY + 180);
-
-            // Artist Name
-            ctx.fillStyle = '#9ca3af';
-            ctx.font = '18px system-ui';
-            ctx.fillText(artistNameInput.value || 'Ziko Mazziko', centerX, centerY + 210);
-
-            // Watermark Branding at Bottom
-            ctx.fillStyle = '#3b82f6';
-            ctx.font = 'bold 13px system-ui';
-            ctx.fillText('Visualized via @ziko.mazziko & @is.zaky.verse', centerX, H - 40);
+            renderFrame();
         }
 
-        // Animation Loop
-        function startVisualizationLoop() {
-            const bufferLength = analyserNode.frequencyBinCount;
-            const dataArray = new Uint8Array(bufferLength);
-
-            function render() {
-                animationFrameId = requestAnimationFrame(render);
-                analyserNode.getByteFrequencyData(dataArray);
-                visualizeFrameOnly(dataArray);
-            }
-            render();
-        }
-
-        // Play / Pause Control Button
-        playBtn.addEventListener('click', async () => {
-            initAudioEngine();
-            if (audioCtx.state === 'suspended') { await audioCtx.resume(); }
-
-            if (!isPlaying) {
-                audioElement.play();
-                isPlaying = true;
-                playBtnText.textContent = "Pause Preview";
-                playBtn.querySelector('i').className = "fa-solid fa-pause text-xs";
-                startVisualizationLoop();
-                statusText.textContent = "Playing preview...";
-            } else {
-                audioElement.pause();
-                isPlaying = false;
-                playBtnText.textContent = "Play & Preview";
-                playBtn.querySelector('i').className = "fa-solid fa-play text-xs";
-                cancelAnimationFrame(animationFrameId);
-                statusText.textContent = "Preview paused.";
-            }
-        });
-
-        // ROBUST DUAL-MODE AUDIO CAPTURE VIDEO EXPORTER (FIXES 0-BYTE ISSUE)
+        // FAILSAFE RECORDING ENGINE (CAPTURES RAW CANVAS STREAM DIRECTLY)
         recordBtn.addEventListener('click', async () => {
             if (!isPlaying) {
                 alert("Please click 'Play & Preview' first before exporting.");
@@ -591,72 +467,28 @@
             }
 
             if (isRecording) {
-                stopVideoRecording();
+                stopRecording();
                 return;
             }
 
             recordedChunks = [];
             
-            // 1. Capture Canvas Stream
+            // Capture canvas video stream
             const canvasStream = canvas.captureStream(30); 
-            const combinedStream = new MediaStream();
             
-            // Add Canvas Video Track
-            canvasStream.getVideoTracks().forEach(track => combinedStream.addTrack(track));
-
-            // 2. Safely Extract Active Audio Stream with Graceful Fallback
-            let audioTrack = null;
-
-            // Attempt A: MediaElement captureStream / webkitCaptureStream
-            try {
-                if (typeof audioElement.captureStream === 'function') {
-                    const elemStream = audioElement.captureStream();
-                    if (elemStream && elemStream.getAudioTracks().length > 0) {
-                        audioTrack = elemStream.getAudioTracks()[0];
-                    }
-                } else if (typeof audioElement.webkitCaptureStream === 'function') {
-                    const elemStream = audioElement.webkitCaptureStream();
-                    if (elemStream && elemStream.getAudioTracks().length > 0) {
-                        audioTrack = elemStream.getAudioTracks()[0];
-                    }
-                }
-            } catch (e) {
-                console.warn("Element stream capture fallback needed:", e);
-            }
-
-            // Attempt B: Fallback to WebAudio MediaStreamDestination
-            if (!audioTrack && mediaStreamDest && mediaStreamDest.stream) {
-                const tracks = mediaStreamDest.stream.getAudioTracks();
-                if (tracks.length > 0) audioTrack = tracks[0];
-            }
-
-            if (audioTrack) {
-                combinedStream.addTrack(audioTrack);
-            }
-
-            // 3. Supported MIME-Type Negotiator
-            const mimeTypes = [
-                'video/webm;codecs=vp9,opus',
-                'video/webm;codecs=vp8,opus',
-                'video/webm',
-                'video/mp4'
-            ];
-            
-            let chosenMime = '';
-            for (const mime of mimeTypes) {
-                if (MediaRecorder.isTypeSupported(mime)) {
-                    chosenMime = mime;
-                    break;
+            // Add WebAudio audio track if present
+            if (mediaStreamDestination && mediaStreamDestination.stream) {
+                const audioTracks = mediaStreamDestination.stream.getAudioTracks();
+                if (audioTracks.length > 0) {
+                    canvasStream.addTrack(audioTracks[0]);
                 }
             }
 
-            const recorderOptions = chosenMime ? { mimeType: chosenMime } : {};
-
             try {
-                mediaRecorder = new MediaRecorder(combinedStream, recorderOptions);
+                mediaRecorder = new MediaRecorder(canvasStream);
             } catch (e) {
-                console.error("MediaRecorder creation error:", e);
-                mediaRecorder = new MediaRecorder(combinedStream);
+                alert("Recording is not supported in this browser.");
+                return;
             }
 
             mediaRecorder.ondataavailable = (e) => {
@@ -667,80 +499,68 @@
 
             mediaRecorder.onstop = () => {
                 if (recordedChunks.length === 0) {
-                    statusText.textContent = "Error: Stream buffer empty. Video capture failed.";
+                    statusText.textContent = "Error: Video buffer empty. Try playing preview again.";
                     return;
                 }
-
+                
                 const blob = new Blob(recordedChunks, { type: mediaRecorder.mimeType || 'video/webm' });
                 const url = URL.createObjectURL(blob);
-                const downloadAnchor = document.createElement('a');
-                downloadAnchor.style.display = 'none';
-                downloadAnchor.href = url;
                 
-                const safeTrackName = (trackTitleInput.value || 'canvas').replace(/[^a-z0-9]/gi, '_').toLowerCase();
-                downloadAnchor.download = `${safeTrackName}_canvas_${Date.now()}.webm`;
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `ziko-canvas-${Date.now()}.webm`;
+                document.body.appendChild(a);
+                a.click();
                 
-                document.body.appendChild(downloadAnchor);
-                downloadAnchor.click();
-
                 setTimeout(() => {
-                    document.body.removeChild(downloadAnchor);
+                    document.body.removeChild(a);
                     window.URL.revokeObjectURL(url);
                 }, 300);
 
-                const sizeMB = (blob.size / (1024 * 1024)).toFixed(2);
-                statusText.textContent = `Video exported successfully! (${sizeMB} MB)`;
-                recordBtnText.textContent = "Export 9:16 Video (.webm)";
-                recordBtn.querySelector('i').className = "fa-solid fa-video text-xs";
+                statusText.textContent = `File saved! Size: ${(blob.size / (1024 * 1024)).toFixed(2)} MB`;
+                recordBtn.textContent = "Export 9:16 Video (.webm)";
                 isRecording = false;
             };
 
-            // Start Recording with 1000ms timeslice to flush buffer chunks continuously
-            mediaRecorder.start(1000);
+            // Start recording immediately without splitting chunks
+            mediaRecorder.start();
             isRecording = true;
-            statusText.textContent = "Recording Canvas stream in real-time... Click 'Stop & Download' when complete.";
-            recordBtnText.textContent = "Stop & Download Video";
-            recordBtn.querySelector('i').className = "fa-solid fa-square text-xs";
+            statusText.textContent = "🔴 Recording in progress... Click 'Stop & Save Video' when done!";
+            recordBtn.textContent = "Stop & Save Video";
         });
 
-        function stopVideoRecording() {
+        function stopRecording() {
             if (mediaRecorder && mediaRecorder.state !== 'inactive') {
                 mediaRecorder.stop();
             }
         }
 
-        // Reset Configuration Button
         resetBtn.addEventListener('click', () => {
             if (audioElement) { audioElement.pause(); }
             isPlaying = false;
             isRecording = false;
-            isImgLoaded = false;
+            defaultImgLoaded = false;
             rotateArtwork = false;
-            cancelAnimationFrame(animationFrameId);
+            cancelAnimationFrame(animationId);
 
             audioFile.value = '';
             imageFile.value = '';
-            audioNameDisplay.textContent = '';
-            imageNameDisplay.textContent = '';
-            trackTitleInput.value = 'Midnight Echoes';
-            artistNameInput.value = 'Ziko Mazziko';
-            visualModeSelect.value = 'bars';
-
+            document.getElementById('trackTitle').value = 'Midnight Echoes';
+            document.getElementById('artistName').value = 'Ziko Mazziko';
+            visualMode.value = 'bars';
+            
             color1Input.value = '#3b82f6';
             color2Input.value = '#8b5cf6';
             color3Input.value = '#ec4899';
 
             rotateIndicator.classList.remove('bg-emerald-400');
             rotateIndicator.classList.add('bg-gray-600');
-            rotateText.textContent = 'Rotate Artwork: OFF';
-
-            btnArtworkColor.click();
+            rotateText.textContent = 'Artwork Rotation: OFF';
 
             playBtn.disabled = true;
             recordBtn.disabled = true;
-            playBtnText.textContent = "Play & Preview";
-            playBtn.querySelector('i').className = "fa-solid fa-play text-xs";
-            statusText.textContent = "Inputs cleared and configuration reset.";
+            playBtn.textContent = "Play & Preview";
+            statusText.textContent = "Configuration reset completed.";
 
             drawPlaceholderArt();
         });
